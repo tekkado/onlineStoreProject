@@ -3,18 +3,42 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Retail Store</title>
     <link rel="stylesheet" href="frontEndCode/css/style.css">
-    <script src="frontEndCode/js/app.js" defer></script>
+    <script src="frontEndCode/js/app.js"></script>
 </head>
 
 <body>
     <!-- Header section (Navigation bar, Sign in/Register buttons) -->
     <header>
         <nav>
-            <!-- Navigation bar code goes here -->
-            <!-- Include links for different sections of your store, e.g., Home, Catalog, Cart, Sign In, Register, etc. -->
+            <div class="logo">
+                <!-- Your store logo goes here -->
+                <img src="logo.png" alt="Your Store Logo">
+            </div>
+            <div class="search-bar">
+                <!-- Search bar for product search -->
+                <input type="text" placeholder="Search products...">
+                <button type="submit">Search</button>
+            </div>
+            <ul class="menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Catalog</a></li>
+                <li><a href="#">Cart</a></li>
+                <li class="account-dropdown">
+                    <!-- Dropdown menu for account options -->
+                    <a href="#" class="account">Account</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Sign In</a></li>
+                        <li><a href="#">Register</a></li>
+                        <!-- Show account options only if the user is signed in -->
+                        <li><a href="#">Account Info</a></li>
+                        <li><a href="#">Orders</a></li>
+                        <li><a href="#">Settings</a></li>
+                        <li><a href="#">Sign Out</a></li>
+                    </ul>
+                </li>
+            </ul>
         </nav>
     </header>
 
@@ -32,7 +56,7 @@
 
     <!-- Footer section -->
     <footer>
-        
+
     </footer>
 </body>
 
