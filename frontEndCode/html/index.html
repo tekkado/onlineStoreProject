@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Online Retail Store</title>
+    <title>mCubed Online Store</title>
     <link href="../css/style.css" rel="stylesheet" type="text/css">
     <script src="../js/app.js" type="text/js"></script>
 </head>
@@ -22,7 +22,7 @@
                 <button type="submit">Search</button>
             </div>
             <ul class="menu">
-                <li><a href="#">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="#">Catalog</a></li>
                 <li><a href="#">Cart</a></li>
                 <li class="account-dropdown">
@@ -44,13 +44,29 @@
 
     <!-- Main content section (Catalog View) -->
     <main>
+        <div class="hero-section">
+            <div class="shopping1-svg">
+                <img src="../assets/shopping.svg" alt="Satisfying Shopping">
+            </div>
+            <div class="slogan-and-btn-container">
+                <div class="slogan">
+                    <h2>Where smiles meet savings, and every purchase sparks joy!<span class="emoji"></span></h2>
+                </div>
+                <div class="shop-now-btn">
+                    <button type="button" onclick="">Shop Now</button>
+                </div>
+            </div>
+        </div>
         <!-- Display products organized by category and brand -->
-        <section id="catalog-view">
+        <section id="featured-catalog-view">
             <h2>Catalog View</h2>
-            <!-- Catalog view code goes here -->
-            <!-- List products with their names, prices, and images -->
-            <!-- Provide filters and sorting options -->
-            <!-- Include buttons or links to view detailed information and add items to the shopping cart -->
+            <div class="featured-blocks">
+                <div class="featured-product">
+                    <img src="product-1.jpg" alt="Product 1">
+                    <p>$19.99</p>
+                </div>
+                <!-- Add more featured product blocks here -->
+            </div>
         </section>
     </main>
 
