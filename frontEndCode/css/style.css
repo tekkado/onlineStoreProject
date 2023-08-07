@@ -6,8 +6,8 @@ body {
 }
 
 header {
-  background-color: #333;
-  color: #fff;
+  background-color: #1b6999;
+  color: #3c3744;
   padding: 10px 20px;
 }
 
@@ -34,8 +34,8 @@ nav {
 
 .search-bar button {
   padding: 5px 10px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: #ffca3a;
+  color: #3c3744;
   border: none;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
@@ -186,8 +186,8 @@ main {
 
 .prev-arrow,
 .next-arrow {
-  background-color: #1982c4;
-  color: #fff;
+  background-color: #ffca3a;
+  color: #3c3744;
   border: none;
   border-radius: 50%;
   width: 40px;
@@ -198,5 +198,5 @@ main {
 
 .prev-arrow:hover,
 .next-arrow:hover {
-  background-color: #0056b3;
+  background-color: #ffeb3b;
 }
