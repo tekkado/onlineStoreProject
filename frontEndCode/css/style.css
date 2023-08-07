@@ -15,6 +15,8 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .logo img {
@@ -24,16 +26,21 @@ nav {
 .search-bar {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .search-bar input[type="text"] {
-  padding: 5px;
-  border: 1px solid #ccc;
+  padding: 10px;
+  width: 450px;
+  border: 1px solid #3c3744;
   border-radius: 5px 0 0 5px;
 }
 
 .search-bar button {
-  padding: 5px 10px;
+  padding: 10px 30px;
   background-color: #ffca3a;
   color: #3c3744;
   border: none;
@@ -45,7 +52,7 @@ nav {
   display: flex;
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding-right: 5px;
 }
 
 .menu li {
@@ -63,11 +70,13 @@ nav {
 .dropdown-menu {
   display: none;
   position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #333;
-  padding: 10px;
+  top: 18px;
+  right: -12px;
+  background-color: #3c3744;
+  padding-left: 0;
+  margin: 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  list-style: none;
 }
 
 .account-dropdown:hover .dropdown-menu {
@@ -75,7 +84,18 @@ nav {
 }
 
 .dropdown-menu li {
-  margin: 5px 0;
+  margin: 0;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 10px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #ffca3a;
 }
 
 a {
@@ -84,7 +104,7 @@ a {
 }
 
 a:hover {
-  color: #007bff;
+  color: #ffca3a;
 }
 
 main {
