@@ -151,3 +151,52 @@ main {
 .shop-now-btn button:hover {
   background-color: #ffeb3b;
 }
+
+#featured-catalog-view h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #3c3744;
+  text-align: center;
+  margin-bottom: 1px;
+}
+
+.featured-slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.slide-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.slideCard {
+  margin: 50px;
+  text-align: center;
+}
+
+.slideCard img {
+  max-width: 100%;
+  height: auto;
+}
+
+.prev-arrow,
+.next-arrow {
+  background-color: #1982c4;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.prev-arrow:hover,
+.next-arrow:hover {
+  background-color: #0056b3;
+}
