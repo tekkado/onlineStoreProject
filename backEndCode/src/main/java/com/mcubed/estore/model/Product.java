@@ -1,5 +1,6 @@
 package com.mcubed.estore.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,10 +13,15 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
+    @Column(name = "id")
     private Integer id;
+    @Column(name = "prod_name")
     private String prodName;
+    @Column(name = "price")
     private double price;
+    @Column(name = "prod_description")
     private String prodDescription;
+    @Column(name = "image_url")
     private String imageUrl;
 
     public Integer getId() {
