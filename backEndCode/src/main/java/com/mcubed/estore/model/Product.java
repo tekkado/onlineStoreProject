@@ -1,7 +1,5 @@
 package com.mcubed.estore.model;
 
-import java.math.BigInteger;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,13 +12,13 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
-    private BigInteger id;
+    private Integer id;
     private String prodName;
     private double price;
     private String prodDescription;
     private String imageUrl;
 
-    public BigInteger getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -40,7 +38,7 @@ public class Product {
         return imageUrl;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
