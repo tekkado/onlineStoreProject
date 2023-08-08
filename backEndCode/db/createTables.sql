@@ -5,3 +5,5 @@ CREATE TABLE product (
     prodDescription TEXT,
     imageUrl VARCHAR(255)
 );
+
+DROP TABLE IF EXISTS product;

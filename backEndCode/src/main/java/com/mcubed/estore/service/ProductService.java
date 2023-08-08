@@ -1,8 +1,8 @@
-package service;
+package com.mcubed.estore.service;
 
 import java.util.List;
 
-import model.Product;
+import com.mcubed.estore.model.Product;
 
 public interface ProductService {
     List<Product> getAllProducts();

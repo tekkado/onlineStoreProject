@@ -1,9 +1,9 @@
-package repository;
+package com.mcubed.estore.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import model.Product;
+import com.mcubed.estore.model.Product;
 
 @Repository
 public interface ProductDAO extends JpaRepository<Product, Long> {
