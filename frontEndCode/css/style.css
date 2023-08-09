@@ -299,3 +299,15 @@ footer {
 .icon a:hover {
   color: #ffca3a;
 }
+
+/* .product-list {
+  display: flex;
+  overflow-x: auto; 
+  white-space: nowrap; 
+}
+
+.product-card {
+  display: inline-block; 
+  width: 250px; 
+  margin-right: 20px; 
+} */
