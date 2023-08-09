@@ -300,7 +300,7 @@ footer {
   color: #ffca3a;
 }
 
-/* .product-list {
+.product-list {
   display: flex;
   overflow-x: auto; 
   white-space: nowrap; 
@@ -310,4 +310,4 @@ footer {
   display: inline-block; 
   width: 250px; 
   margin-right: 20px; 
-} */
+}
