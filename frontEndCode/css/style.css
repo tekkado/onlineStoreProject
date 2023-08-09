@@ -265,7 +265,7 @@ footer {
 .footer-content {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
   max-width: 1200px;
   margin: 0 auto;
