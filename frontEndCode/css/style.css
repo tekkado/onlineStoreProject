@@ -349,6 +349,7 @@ footer {
 }
 
 .product-card {
+  border-radius: 10px;
   background-color: #fff;
   padding: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -368,7 +369,7 @@ footer {
 
 .product-card p.price {
   font-size: 16px;
-  color: #ffca3a;
+  color: black;
   font-weight: bold;
 }
 
@@ -395,38 +396,6 @@ footer {
   color: #000; 
 }
 
-.product-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); 
-  grid-gap: 20px;
-  margin-top: 20px;
-}
-
-.product-card {
-  background-color: #fff;
-  padding: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.product-card img {
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 10px;
-}
-
-.product-card h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: #000; 
-}
-
-.product-card p.price {
-  font-size: 16px;
-  color: #000; 
-  font-weight: bold;
-}
-
 .content-container {
   display: flex;
   flex-direction: row;
@@ -440,6 +409,7 @@ footer {
   flex-grow: 1; 
   margin-right: 20px; 
   margin-top: 20px; 
+  border-radius: 10px;
 }
 
 .product-list {
@@ -474,6 +444,8 @@ footer {
 
 .product-card:hover {
   background-color: #ffca3a;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .continue-shopping {
@@ -489,11 +461,13 @@ footer {
   color: white;
   text-decoration: none;
   border-radius: 5px;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .continue-shopping a:hover {
   background-color: #103d58;
-  color: #ffca3a;
+  color: white;
 }
 
 .cart-title {
@@ -510,8 +484,10 @@ footer {
   color: black;
   border: none;
   border-radius: 5px;
-  font-size: 18px;
+  font-size: 14px;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .checkout-button:hover {
@@ -530,7 +506,7 @@ footer {
 }
 
 .cart-image img {
-  width: 100px; /* Adjust the width as needed */
+  width: 100px; 
   margin-right: 20px;
   float: left;
 }
@@ -540,9 +516,11 @@ footer {
   flex-direction: column;
   align-items: center;
   margin-top: 5px;
+  margin-left: 50px;
 }
 
 .total {
   font-size: 18px;
   margin-bottom: -50px;
+  font-weight: bold;
 }
