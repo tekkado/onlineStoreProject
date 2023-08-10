@@ -82,4 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     featuredSlideShow(featuredSlideIndex);
 
-});
+}
+
+);
+
