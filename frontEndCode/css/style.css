@@ -182,7 +182,7 @@ main {
 }
 
 .shop-now-btn button:hover {
-  background-color: #ffca3a;
+  background-color: #ffeb3b;
 }
 
 #featured-catalog-view h2 {
@@ -257,7 +257,7 @@ main {
 
 .prev-arrow:hover,
 .next-arrow:hover {
-  background-color: #ffca3a;
+  background-color: #ffeb3b;
 }
 
 footer {
@@ -515,7 +515,7 @@ footer {
 }
 
 .checkout-button:hover {
-  background-color: #b9932a;
+  background-color: #ffeb3b;
 }
 
 .cart {
