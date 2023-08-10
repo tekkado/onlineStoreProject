@@ -120,7 +120,8 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - (header height + footer height));
+  position: relative;
+  min-height: 100vh;
 }
 
 .hero-section {
