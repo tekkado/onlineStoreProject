@@ -23,6 +23,10 @@ public class Product {
     private String prodDescription;
     @Column(name = "image_url")
     private String imageUrl;
+    @Column(name = "category")
+    private String category;
+    @Column(name = "brand")
+    private String brand;
 
     public Integer getId() {
         return id;
@@ -43,6 +47,15 @@ public class Product {
     public String getImageUrl() {
         return imageUrl;
     }
+    
+    public String getCategory() {
+        return category;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
 
     public void setId(Integer id) {
         this.id = id;
@@ -62,5 +75,13 @@ public class Product {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+    
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 }
