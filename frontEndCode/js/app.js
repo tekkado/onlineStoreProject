@@ -1,5 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    function redirectToCatalog() {
+        window.location.href = '../views/catalog.html';
+    }
+
+    const shopNowButton = document.getElementById('shop-now-button');
+    if (shopNowButton) {
+        shopNowButton.addEventListener('click', redirectToCatalog);
+    }
+
     function displayFeaturedProducts(products) {
         const catalogContainer = document.getElementById('featured-container');
         catalogContainer.innerHTML = '';
@@ -82,4 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     featuredSlideShow(featuredSlideIndex);
 
-});
+}
+
+);
+
