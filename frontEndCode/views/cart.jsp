@@ -1,14 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>mCubed Online Store</title>
-    <link href="../css/style.css" rel="stylesheet" type="text/css">
+    <title>Shopping Cart</title>
+    <link href="${pageContext.request.contextPath}../../css/style.css" rel="stylesheet" type="text/css">
 </head>
-
 <body>
-    <!-- Header section (Navigation bar, Sign in/Register buttons) -->
     <header>
         <nav>
             <div class="logo">
@@ -25,7 +23,7 @@
             <ul class="menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="../views/catalog.html">Catalog</a></li>
-                <li><a href="../views/cart.jsp">Cart</a></li>
+                <li><a href="#">Cart</a></li>
                 <li class="account-dropdown">
                     <!-- Dropdown menu for account options -->
                     <a href="#" class="account">Account</a>
@@ -43,38 +41,19 @@
         </nav>
     </header>
 
-    <!-- Main content section -->
     <main>
-
-        <div class="hero-section">
-            <div class="shopping1-svg">
-                <img src="../assets/shopping.svg" alt="Satisfying Shopping">
+        <section class="cart">
+            <h1>Your Shopping Cart</h1>
+            <div class="cart-items">
+                <!-- Loop through cart items and display details -->
             </div>
-            <div class="slogan-and-btn-container">
-                <div class="slogan">
-                    <h1>Where smiles meet savings, and every purchase sparks joy!<span class="emoji"></span></h1>
-                </div>
-                <div class="shop-now-btn">
-                    <button type="button" onclick="window.location.href='../views/catalog.html'">Shop Now</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Display featured products -->
-        <section id="featured-catalog-view">
-            <h2>Featured Products</h2>
-            <div class="featured-slider">
-                <button class="prev-arrow" onclick="prevSlide()">&#8249;</button>
-                <div class="slide-container" id="featured-container">
-                    <!-- Each slide will represent a featured product card, dynamically made (server needs to be on) -->
-                </div>
-                <button class="next-arrow" onclick="nextSlide()">&#8250;</button>
+            <div class="cart-summary">
+                <p>Total: $100.00</p>
+                <button>Proceed to Checkout</button>
             </div>
         </section>
-
     </main>
 
-    <!-- Footer section -->
     <footer>
         <div class="footer-content">
 
@@ -124,9 +103,6 @@
         <div class="footer-bottom">
           <p>&copy; 2023 mCubed Online Store. All rights reserved.</p>
         </div>
-      </footer>      
-
-    <script src="../js/app.js" type="text/javascript"></script>
+      </footer>
 </body>
-
 </html>
