@@ -184,7 +184,13 @@ main {
   font-weight: bold;
   color: #3c3744;
   text-align: center;
-  margin-bottom: 1px;
+  margin-bottom: 15px;
+}
+
+#featured-container {
+  width: 650px;
+  justify-content: center;
+  overflow: hidden;
 }
 
 .featured-slider {
@@ -202,13 +208,32 @@ main {
 }
 
 .slideCard {
-  margin: 50px;
+  margin: 40px;
   text-align: center;
 }
 
 .slideCard img {
   max-width: 100%;
   height: auto;
+}
+
+.slideCard p {
+  margin-bottom: 10px;
+}
+
+.slideCard p.price {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.slideCardLink {
+  text-decoration: none;
+  color: #000000;
+}
+
+.slideCardLink:hover {
+  font-weight: 600;
+  color: #000000;
 }
 
 .prev-arrow,
@@ -221,6 +246,7 @@ main {
   height: 40px;
   font-size: 20px;
   cursor: pointer;
+  flex: none;
 }
 
 .prev-arrow:hover,
@@ -238,7 +264,11 @@ footer {
 
 .footer-content {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .footer-section {
