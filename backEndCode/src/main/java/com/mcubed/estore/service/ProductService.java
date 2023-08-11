@@ -8,4 +8,6 @@ public interface ProductService {
     List<Product> getAllProducts();
 
 	List<Product> getFeaturedProducts(int count);
+
+	List<Product> getUniqueCategoriesAndBrands();
 }

@@ -50,4 +50,39 @@ public class ProductServiceImpl implements ProductService {
 
 		return featuredProducts;
 	}
+
+	@Override
+	public List<Product> getUniqueCategoriesAndBrands() {
+		// TODO Auto-generated method stub
+		List<String> uniqueCategories = getUniqueCategories();
+	    List<String> uniqueBrands = getUniqueBrands();
+
+	    List<Product> uniqueProducts = new ArrayList<>();
+
+	    for (String category : uniqueCategories) {
+	        Product product = new Product();
+	        product.setCategory(category);
+	        uniqueProducts.add(product);
+	    }
+
+	    for (String brand : uniqueBrands) {
+	        Product product = new Product();
+	        product.setBrand(brand);
+	        uniqueProducts.add(product);
+	    }
+
+	    return uniqueProducts;
+	}
+
+	private List<String> getUniqueBrands() {
+		// TODO Auto-generated method stub
+		return productDAO.findDistinctBrands();
+	}
+
+	private List<String> getUniqueCategories() {
+		// TODO Auto-generated method stub
+		return productDAO.findDistinctCategories();
+	}
+	
+	
 }

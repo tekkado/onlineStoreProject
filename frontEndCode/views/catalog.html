@@ -10,12 +10,12 @@
 <body>
   <header>
     <nav>
-        <div class="logo">
-            <!-- Your store logo goes here -->
-            <a href="../html/index.html">
-                <img src="../assets/logo.png" alt="mCubed Logo">
-            </a>
-        </div>
+      <div class="logo">
+        <!-- Your store logo goes here -->
+        <a href="../html/index.html">
+          <img src="../assets/logo.png" alt="mCubed Logo">
+        </a>
+      </div>
       <div class="search-bar">
         <!-- Search bar for product search -->
         <input type="text" placeholder="Search products...">
@@ -44,45 +44,38 @@
 
   <main>
     <section class="catalog">
-        <div class="category-list">
-          <h2>Sort and Filter</h2>
-          <ul>
-            <li><a href="#">Sort by Price</a></li>
-            <li><a href="#">Sort By Name</a></li>
-            <li class="dropdown">
-              <a href="#">Electronics</a>
-            </li>
-            <li class="dropdown">
-              <a href="#">Clothing</a>
-            </li>
-            <li class="dropdown">
-              <a href="#">Books</a>
-            </li>
-            <li class="dropdown">
-              <a href="#">Home & Kitchen</a>
-            </li>
-            <li class="dropdown">
-              <a href="#">Brand</a>
-              <ul class="dropdown-content">
-                <li><a href="#">Brand P</a></li>
-                <li><a href="#">Brand Q</a></li>
-                <li><a href="#">Brand R</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-          <div class="product-list">
-            <!-- Products are dynamically created here -->
-          </div>
+      <div class="category-list">
+        <h2>Sort and Filter</h2>
+        <ul>
+          <li><a href="#" id="sort-price">Sort by Price</a></li>
+          <li><a href="#" id="sort-name">Sort By Name</a></li>
+          <li class="dropdown">
+            <a href="#">Category</a>
+            <ul class="dropdown-content" id="category-dropdown">
+              <!-- Categories will be dynamically populated here -->
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#">Brand</a>
+            <ul class="dropdown-content" id="brand-dropdown">
+              <!-- Brands will be dynamically populated here -->
+            </ul>
+          </li>
+        </ul>
+        <button id="clear-filters" onclick="clearFilters()">Clear Filters</button>
+      </div>
+      <div class="product-list">
+        <!-- Products are dynamically created here -->
+      </div>
     </section>
-    
+
     <div class="button-container">
       <button class="prev-arrow" id="prev-catalog-arrow" onclick="prevCatalogPage()">&#8249;</button>
       <button class="next-arrow" id="next-catalog-arrow" onclick="nextCatalogPage()">&#8250;</button>
     </div>
-</main>
+  </main>
 
-<footer>
+  <footer>
     <div class="footer-content">
 
       <div class="footer-section">
@@ -105,25 +98,25 @@
         <h3>Connect with us</h3>
         <p>Stay updated on our professional careers!</p>
         <div class="social-icons">
-            <div class="icon">
-              <a href="https://www.linkedin.com/in/shamsminalrahman/" target="_blank">
-                <img src="../assets/icon-linkedin.svg" alt="Minal's LinkedIn">
-                Minal's LinkedIn
-              </a>
-            </div>
-            <div class="icon">
-              <a href="https://www.linkedin.com/in/marko-zivkovic-99276022b/" target="_blank">
-                <img src="../assets/icon-linkedin.svg" alt="Marko's LinkedIn">
-                Marko's LinkedIn
-              </a>
-            </div>
-            <div class="icon">
-              <a href="https://www.linkedin.com/in/mostafa-bander/" target="_blank">
-                <img src="../assets/icon-linkedin.svg" alt="Mostafa's LinkedIn">
-                Mostafa's LinkedIn
-              </a>
-            </div>
+          <div class="icon">
+            <a href="https://www.linkedin.com/in/shamsminalrahman/" target="_blank">
+              <img src="../assets/icon-linkedin.svg" alt="Minal's LinkedIn">
+              Minal's LinkedIn
+            </a>
           </div>
+          <div class="icon">
+            <a href="https://www.linkedin.com/in/marko-zivkovic-99276022b/" target="_blank">
+              <img src="../assets/icon-linkedin.svg" alt="Marko's LinkedIn">
+              Marko's LinkedIn
+            </a>
+          </div>
+          <div class="icon">
+            <a href="https://www.linkedin.com/in/mostafa-bander/" target="_blank">
+              <img src="../assets/icon-linkedin.svg" alt="Mostafa's LinkedIn">
+              Mostafa's LinkedIn
+            </a>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -131,9 +124,9 @@
     <div class="footer-bottom">
       <p>&copy; 2023 mCubed Online Store. All rights reserved.</p>
     </div>
-  </footer>    
+  </footer>
 
-    <script src="../js/app.js" type="text/javascript"></script>
+  <script src="../js/app.js" type="text/javascript"></script>
 </body>
 
 </html>
