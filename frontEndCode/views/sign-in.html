@@ -43,58 +43,31 @@
 
     <!-- Main content section -->
     <main>
-        <div>
-                <div class="cart-image">
-                        <img src="../assets/shopping-cart.svg" alt="Shopping Cart Image">
+            <div class="signup-logo">
+                <img src="../assets/logo.png" alt="mCubed Logo">
+            </div>
+            <div class="signup-form">
+                <h1 class="signup-title">Sign In</h1>
+                <form>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" id="email" name="email" class="sign" required>
                     </div>
-            <h1 class="cart-title">Your Shopping Cart</h1>
-            <div class="cart">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Total</th>
-                        <th>Remove</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Display cart items with quantities and prices -->
-                    <tr>
-                        <td>Item 1</td>
-                        <td><input type="number" value="1"></td>
-                        <td>$10.00</td>
-                        <td>$10.00</td>
-                        <td><button>Remove</button></td>
-                    </tr>
-                    <tr>
-                            <td>Item 1</td>
-                            <td><input type="number" value="1"></td>
-                            <td>$10.00</td>
-                            <td>$10.00</td>
-                            <td><button>Remove</button></td>
-                        </tr>
-                        <tr>
-                                <td>Item 1</td>
-                                <td><input type="number" value="1"></td>
-                                <td>$10.00</td>
-                                <td>$10.00</td>
-                                <td><button>Remove</button></td>
-                            </tr>
-                    <!-- Add more rows for other items -->
-                </tbody>
-            </table>
-            <div class="cart-summary">
-            <div class="total">
-                <p>Total: $30.00</p>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" class="sign" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" class="sign" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="signup-button">Sign In</button>
+                    </div>
+                </form>
+                <p class="already-have-account">Don't have an Account? <a href="../views/sign-in.html">Register Now</a></p>
             </div>
-                <button class="checkout-button">Checkout</button>
-            </div>
-            </div>
-            <p class="continue-shopping"><a href="../views/catalog.html">Back to Shopping!</a></p>
-        </div>
-    </main>
+        </main>
 
     <footer>
             <div class="footer-content">
