@@ -25,7 +25,16 @@ public class ProductController {
 
     @GetMapping
     public List<Product> getAllProducts() {
-        return productService.getAllProducts();
+    	List<Product> products = productService.getAllProducts();
+        for (Product product : products) {
+            // Use the correct getter to ensure consistency with the entity
+            product.setName(product.getName());
+            product.setDescription(product.getDescription());
+            product.setImageUrl(product.getImageUrl());
+            product.setCategory(product.getCategory());
+            product.setBrand(product.getBrand());
+        }
+        return products;
     }
     
     @GetMapping("/featured")
