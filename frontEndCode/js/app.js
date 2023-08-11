@@ -1,6 +1,6 @@
 console.log("DOMContentLoaded event triggered");
 document.addEventListener("DOMContentLoaded", () => {
-  function fetchProducts(callback) {
+  function fetchProducts(callback) { // recieves all products from sql
     const apiUrl = "http://localhost:8080/api/products";
     fetch(apiUrl)
       .then((response) => response.json())
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     displaySlide(products, currentSlideIndex);
   }
 
-  function fetchAndInitializeProducts() {
+  function fetchAndInitializeProducts() { //this is just for feature slide on home page
     fetchProducts((products) => {
       const firstSixProducts = products.slice(0, 6);
       displaySlide(firstSixProducts, currentSlideIndex);
@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadPage(currentPage);
   });
 
-  function clearFilters() {
+  function clearFilters() { // how to go back to the initail catalog view
     const categoryLinks = document.querySelectorAll(".filter-category");
     const brandLinks = document.querySelectorAll(".filter-brand");
 
@@ -203,7 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   console.log("Fetching unique categories and brands...");
-  function fetchUniqueCategoriesAndBrands(callback) {
+  function fetchUniqueCategoriesAndBrands(callback) { // getting brands and categories
     const apiUrl =
       "http://localhost:8080/api/products/unique-categories-brands";
     fetch(apiUrl)
@@ -251,6 +251,8 @@ document.addEventListener("DOMContentLoaded", () => {
       brandsDropdown.appendChild(li);
     });
   });
+
+  // -- category and brand --
 
   document.addEventListener("click", (event) => {
     if (event.target.classList.contains("filter-category")) {
