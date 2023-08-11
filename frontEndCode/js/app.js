@@ -1,17 +1,19 @@
 console.log("DOMContentLoaded event triggered");
 document.addEventListener("DOMContentLoaded", () => {
-  function fetchProducts(callback) { // recieves all products from sql
-    const apiUrl = "http://localhost:8080/api/products";
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((products) => {
-        console.log("Fetched products: ", products);
-        callback(products);
-      })
-      .catch((error) => {
-        console.error("Error fetching products:", error);
-      });
-  }
+  let originalProducts = []; 
+  
+  function fetchProducts(callback) {
+    const apiUrl = "http://localhost:8080/api/products";
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((products) => {
+        originalProducts = products; 
+        callback(products);
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+      });
+  }
 
   let currentSlideIndex = 0;
   const productsPerPage = 3;
@@ -106,6 +108,10 @@ document.addEventListener("DOMContentLoaded", () => {
       productCard.appendChild(image);
       productCard.appendChild(title);
       productCard.appendChild(price);
+
+      productCard.addEventListener("click", () => {
+        window.location.href = "../html/index.html";
+      });
 
       productContainer.appendChild(productCard);
     }
@@ -296,29 +302,29 @@ document.addEventListener("DOMContentLoaded", () => {
     loadPage(currentPage);
   }
 
-  function filterByCategory(category) {
-    if (!category) {
-      loadPage(currentPage);
-      return;
-    }
+   function filterByCategory(category) {
+    if (!category) {
+      loadPage(currentPage);
+      return;
+    }
+  
+    const filteredProducts = originalProducts.filter(
+      (product) => product.category === category
+    );
+    loadFilteredProducts(filteredProducts);
+  }
 
-    const filteredProducts = products.filter(
-      (product) => product.category === category
-    );
-    loadFilteredProducts(filteredProducts);
-  }
-
-  function filterByBrand(brand) {
-    if (!brand) {
-      loadPage(currentPage);
-      return;
-    }
-
-    const filteredProducts = products.filter(
-      (product) => product.brand === brand
-    );
-    loadFilteredProducts(filteredProducts);
-  }
+  function filterByBrand(brand) {
+    if (!brand) {
+      loadPage(currentPage);
+      return;
+    }
+  
+    const filteredProducts = originalProducts.filter(
+      (product) => product.brand === brand
+    );
+    loadFilteredProducts(filteredProducts);
+  }
 
   function loadFilteredProducts(filteredProducts) {
     products = filteredProducts;
