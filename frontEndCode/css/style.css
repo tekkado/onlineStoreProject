@@ -533,11 +533,11 @@ footer {
 }
 
 .signup-form {
-  width: 550px; /* Adjust the width as needed */
+  width: 550px; 
   margin: 0 auto;
   padding: 20px;
   background-color: #f5f5f5;
-  border-radius: 5px;
+  border-radius: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -556,7 +556,7 @@ label {
   margin-bottom: 5px;
 }
 
-.sign{
+.input-field{
   width: 96%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -590,7 +590,7 @@ label {
 }
 
 .signup-logo img {
-  max-width: 100px; /* Adjust the size as needed */
+  max-width: 100px;
 }
 
 .already-have-account {
