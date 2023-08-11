@@ -1,5 +1,6 @@
+console.log('DOMContentLoaded event triggered');
 document.addEventListener('DOMContentLoaded', () => {
-    
+  
     function fetchProducts(callback) {
         const apiUrl = 'http://localhost:8080/api/products';
         fetch(apiUrl)
@@ -142,5 +143,122 @@ document.addEventListener('DOMContentLoaded', () => {
         products = fetchedProducts;
         loadPage(currentPage);
     });
+
+    function sortProductsByPrice(products) {
+      return products.slice().sort((a, b) => a.price - b.price);
+    }
+
+    function sortProductsByName(products) {
+      return products.slice().sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    const sortPriceBtn = document.querySelector("#sort-price");
+    const sortNameBtn = document.querySelector("#sort-name");
+
+    let priceSortOrder = "asc";
+    let nameSortOrder = "asc";
+
+    sortPriceBtn.addEventListener("click", () => {
+        if (priceSortOrder === "asc") {
+          products = sortProductsByPrice(products);
+          priceSortOrder = "desc";
+        } else {
+          products = sortProductsByPrice(products).reverse();
+          priceSortOrder = "asc";
+        }
+        nameSortOrder = "asc";
+        loadPage(currentPage);
+      });
+      
+      sortNameBtn.addEventListener("click", () => {
+        if (nameSortOrder === "asc") {
+          products = sortProductsByName(products);
+          nameSortOrder = "desc";
+        } else {
+          products = sortProductsByName(products).reverse();
+          nameSortOrder = "asc";
+        }
+        priceSortOrder = "asc";
+        loadPage(currentPage);
+      });
+
+      console.log("Fetching unique categories and brands...");
+      function fetchUniqueCategoriesAndBrands(callback) {
+        const apiUrl =
+          "http://localhost:8080/api/products/unique-categories-brands";
+        fetch(apiUrl)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Fetched unique categories and brands: ", data);
+            callback(data);
+          })
+          .catch((error) => {
+            console.error(
+              "Error fetching unique categories and brands:",
+              error
+            );
+          });
+      }
+
+      function generateDropdownItems(items, container, className, attribute) {
+        container.innerHTML = "";
+
+        items.forEach((item) => {
+          const link = document.createElement("a");
+          link.href = "#";
+          link.className = className;
+          link.textContent = item;
+          link.setAttribute(attribute, item);
+
+          const listItem = document.createElement("li");
+          listItem.appendChild(link);
+
+          container.appendChild(listItem);
+        });
+      }
+
+      fetchUniqueCategoriesAndBrands((data) => {
+        const uniqueCategories = data.categories;
+        const uniqueBrands = data.brands;
+
+        const categoryDropdown = document.querySelector('.dropdown#category-dropdown');
+        const brandDropdown = document.querySelector('.dropdown#brand-dropdown');
+
+        generateDropdownItems(
+          uniqueCategories,
+          categoryDropdown,
+          "filter-category",
+          "data-category"
+        );
+        generateDropdownItems(
+          uniqueBrands,
+          brandDropdown,
+          "filter-brand",
+          "data-brand"
+        );
+
+        const categoryLinks = document.querySelectorAll(".filter-category");
+        const brandLinks = document.querySelectorAll(".filter-brand");
+
+        categoryLinks.forEach((link) => {
+          link.addEventListener("click", () => {
+            const selectedCategory = link.getAttribute("data-category");
+            if (selectedCategory) {
+              products = filterProductsByCategory(selectedCategory);
+              loadPage(1);
+            }
+          });
+        });
+
+        brandLinks.forEach((link) => {
+          link.addEventListener("click", () => {
+            const selectedBrand = link.getAttribute("data-brand");
+            if (selectedBrand) {
+              products = filterProductsByBrand(selectedBrand);
+              loadPage(1);
+            }
+          });
+        });
+      });
 
 });

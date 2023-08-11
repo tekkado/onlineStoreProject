@@ -47,22 +47,22 @@
         <div class="category-list">
           <h2>Sort and Filter</h2>
           <ul>
-            <li><a href="#">Sort by Price</a></li>
-            <li><a href="#">Sort By Name</a></li>
+            <li><a href="#" id="sort-price">Sort by Price</a></li>
+            <li><a href="#" id="sort-name">Sort By Name</a></li>
             <li class="dropdown">
               <a href="#">Category</a>
-              <ul class="dropdown-content">
-                <li><a href="#">Cat P</a></li>
-                <li><a href="#">cat Q</a></li>
-                <li><a href="#">cat R</a></li>
+              <ul class="dropdown-content" id="category-dropdown">
+                <!-- Categories will be dynamically populated here -->
+                <li><a href="#" class="filter-category" data-category="Category 1">Category 1</a></li>
+                <li><a href="#" class="filter-category" data-category="Category 2">Category 2</a></li>
               </ul>
             </li>
             <li class="dropdown">
               <a href="#">Brand</a>
-              <ul class="dropdown-content">
-                <li><a href="#">Brand P</a></li>
-                <li><a href="#">Brand Q</a></li>
-                <li><a href="#">Brand R</a></li>
+              <ul class="dropdown-content" id="brand-dropdown">
+                <!-- Brands will be dynamically populated here -->
+                <li><a href="#" class="filter-brand" data-brand="Brand 1">Brand 1</a></li>
+                <li><a href="#" class="filter-brand" data-brand="Brand 2">Brand 2</a></li>
               </ul>
             </li>
           </ul>

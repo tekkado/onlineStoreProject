@@ -103,7 +103,7 @@ nav {
 }
 
 .dropdown-menu li a:hover {
-  background-color: #ffca3a;
+  background-color: #dba920;
 }
 
 a {
@@ -399,11 +399,6 @@ footer {
   color: #000; 
 }
 
-.content-container {
-  display: flex;
-  flex-direction: row;
-}
-
 .category-list {
   background-color: #f1f1f1;
   color: #000;
@@ -413,6 +408,10 @@ footer {
   margin-right: 20px; 
   margin-top: 20px; 
   border-radius: 10px;
+}
+
+.category-list a:hover  {
+  color: #dba920;
 }
 
 .product-list {

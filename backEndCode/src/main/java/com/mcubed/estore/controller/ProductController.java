@@ -3,6 +3,7 @@ package com.mcubed.estore.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +28,6 @@ public class ProductController {
     public List<Product> getAllProducts() {
     	List<Product> products = productService.getAllProducts();
         for (Product product : products) {
-            // Use the correct getter to ensure consistency with the entity
             product.setName(product.getName());
             product.setDescription(product.getDescription());
             product.setImageUrl(product.getImageUrl());
@@ -40,6 +40,12 @@ public class ProductController {
     @GetMapping("/featured")
     public List<Product> getFeaturedProducts() {
         return productService.getFeaturedProducts(6);
+    }
+    
+    @GetMapping("/unique-categories-brands")
+    public ResponseEntity<List<Product>> getUniqueCategoriesAndBrands() {
+        List<Product> uniqueProducts = productService.getUniqueCategoriesAndBrands();
+        return ResponseEntity.ok(uniqueProducts);
     }
 
 }
