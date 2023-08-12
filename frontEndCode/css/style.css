@@ -189,6 +189,16 @@ main {
   background-color: #ffeb3b;
 }
 
+.catalog-title {
+  text-align: center;
+  font-size: 3rem;
+  margin-top: 40px;
+  color: #333; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
+  letter-spacing: 2px; 
+  font-family: "Arial", sans-serif;
+}
+
 #featured-catalog-view h2 {
   font-size: 24px;
   font-weight: bold;
@@ -537,7 +547,6 @@ footer {
 
 .cart-image img {
   width: 100px;
-  margin-right: 20px;
   float: left;
 }
 
@@ -696,6 +705,7 @@ label {
 .continue-shopping {
   text-align: center;
   margin-top: 2rem;
+  margin-bottom: 20px;
 }
 
 table {
