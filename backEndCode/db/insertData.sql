@@ -34,3 +34,5 @@ VALUES
 ('Robot Vacuum Cleaner', 299.99, 'Autonomous vacuum cleaner for efficient cleaning', 'product-28.jpg', 'Home', 'iRobot');
 
 SELECT * FROM product;
+SELECT * FROM userAccount;
+SELECT * FROM address;
