@@ -17,7 +17,7 @@ CREATE TABLE address (
     phone VARCHAR(20)
 );
 
-CREATE TABLE userAccount (
+CREATE TABLE user_account (
     id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(255),
     last_name VARCHAR(255),
@@ -29,3 +29,5 @@ CREATE TABLE userAccount (
 );
 
 DROP TABLE IF EXISTS product;
+DROP TABLE IF EXISTS user_account;
+DROP TABLE IF EXISTS address;

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Product Detail</title>
+    <link href="../css/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <!-- Your store logo goes here -->
+                <a href="../html/index.html">
+                    <img src="../assets/logo.png" alt="mCubed Logo">
+                </a>
+            </div>
+            <div class="search-bar">
+                <!-- Search bar for product search -->
+                <input type="text" placeholder="Search products...">
+                <button type="submit">Search</button>
+            </div>
+            <ul class="menu">
+                <li><a href="../html/index.html">Home</a></li>
+                <li><a href="../views/catalog.html">Catalog</a></li>
+                <li><a href="../views/cart.html">Cart</a></li>
+                <li class="account-dropdown">
+                    <!-- Dropdown menu for account options -->
+                    <a href="#" class="account">Account</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Sign In</a></li>
+                        <li><a href="#">Register</a></li>
+                        <!-- Show account options only if the user is signed in -->
+                        <li><a href="#">Account Info</a></li>
+                        <li><a href="#">Orders</a></li>
+                        <li><a href="#">Settings</a></li>
+                        <li><a href="#">Sign Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="product-details-container">
+            <div class="product-image">
+                <img src="../assets/shopping.svg" alt="Little Prince" />
+            </div>
+            <div class="product-details-box">
+                <div class="product-details">
+                    <h2>Product Name</h2>
+                    <p>Price: $19.99</p>
+                    <p>Category: Books</p>
+                    <p>Brand: Classic</p>
+                    <p>Description: A book for all ages</p>
+                </div>
+            </div>
+            <div class="buttons">
+                <a href="../views/cart.html" id="add-to-cart">Add to Cart</a>
+            </div>
+        </section>
+
+
+        <div class="continue-shopping">
+            <a href="../views/catalog.html">Continue Shopping</a>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: mCubed@yorku.ca</p>
+                <p>Phone: (647) 456-7890</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="../views/catalog.html">Catalog</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect with us</h3>
+                <p>Stay updated on our professional careers!</p>
+                <div class="social-icons">
+                    <div class="icon">
+                        <a href="https://www.linkedin.com/in/shamsminalrahman/" target="_blank">
+                            <img src="../assets/icon-linkedin.svg" alt="Minal's LinkedIn">
+                            Minal's LinkedIn
+                        </a>
+                    </div>
+                    <div class="icon">
+                        <a href="https://www.linkedin.com/in/marko-zivkovic-99276022b/" target="_blank">
+                            <img src="../assets/icon-linkedin.svg" alt="Marko's LinkedIn">
+                            Marko's LinkedIn
+                        </a>
+                    </div>
+                    <div class="icon">
+                        <a href="https://www.linkedin.com/in/mostafa-bander/" target="_blank">
+                            <img src="../assets/icon-linkedin.svg" alt="Mostafa's LinkedIn">
+                            Mostafa's LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 mCubed Online Store. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        const urlSearchParams = new URLSearchParams(window.location.search);
+const productName = urlSearchParams.get("name");
+const productImageSrc = urlSearchParams.get("imageSrc");
+const productPrice = urlSearchParams.get("price");
+const productCategory = urlSearchParams.get("category");
+const productBrand = urlSearchParams.get("brand");
+const productDescription = urlSearchParams.get("description");
+
+const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+// Populate the product details in the HTML
+document.querySelector("h2").textContent = productName;
+document.querySelector("img").src = productImageSrc;
+document.querySelectorAll("p")[0].textContent = `Price: $${productPrice}`;
+document.querySelectorAll("p")[1].textContent = `Category: ${productCategory}`;
+document.querySelectorAll("p")[2].textContent = `Brand: ${productBrand}`;
+document.querySelectorAll("p")[3].textContent = `Description: ${productDescription}`;
+
+const addToCartButton = document.getElementById("add-to-cart");
+// Attach a click event listener to the "Add to Cart" button
+addToCartButton.addEventListener("click", () => {
+  const product = {
+    name: productName,
+    price: parseFloat(productPrice),
+    imageSrc: productImageSrc,
+    category: productCategory,
+    brand: productBrand,
+    description: productDescription
+  };
+
+  const existingCartItemIndex = cartItems.findIndex(cartItem => cartItem.name === product.name);
+
+  if (existingCartItemIndex !== -1) {
+    // Item already exists, increase its quantity
+    cartItems[existingCartItemIndex].quantity++;
+  } else {
+    // Item doesn't exist, add it to the cart
+    product.quantity = 1;
+    cartItems.push(product);
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cartItems));
+  displayCartItems();
+});
+    </script>
+</body>
+
+</html>
