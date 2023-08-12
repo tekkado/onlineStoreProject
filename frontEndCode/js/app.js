@@ -1,19 +1,18 @@
 console.log("DOMContentLoaded event triggered");
 document.addEventListener("DOMContentLoaded", () => {
-  let originalProducts = []; 
-  
-  function fetchProducts(callback) {
-    const apiUrl = "http://localhost:8080/api/products";
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((products) => {
-        originalProducts = products; 
-        callback(products);
-      })
-      .catch((error) => {
-        console.error("Error fetching products:", error);
-      });
-  }
+  let originalProducts = [];
+  function fetchProducts(callback) {
+    const apiUrl = "http://localhost:8080/api/products";
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((products) => {
+        originalProducts = products;
+        callback(products);
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+      });
+  }
 
   let currentSlideIndex = 0;
   const productsPerPage = 3;
@@ -61,7 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
     displaySlide(products, currentSlideIndex);
   }
 
-  function fetchAndInitializeProducts() { //this is just for feature slide on home page
+  function fetchAndInitializeProducts() {
+    //this is just for feature slide on home page
     fetchProducts((products) => {
       const firstSixProducts = products.slice(0, 6);
       displaySlide(firstSixProducts, currentSlideIndex);
@@ -150,7 +150,8 @@ document.addEventListener("DOMContentLoaded", () => {
     loadPage(currentPage);
   });
 
-  function clearFilters() { // how to go back to the initail catalog view
+  function clearFilters() {
+    // how to go back to the initail catalog view
     const categoryLinks = document.querySelectorAll(".filter-category");
     const brandLinks = document.querySelectorAll(".filter-brand");
 
@@ -209,7 +210,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   console.log("Fetching unique categories and brands...");
-  function fetchUniqueCategoriesAndBrands(callback) { // getting brands and categories
+  function fetchUniqueCategoriesAndBrands(callback) {
+    // getting brands and categories
     const apiUrl =
       "http://localhost:8080/api/products/unique-categories-brands";
     fetch(apiUrl)
@@ -302,29 +304,27 @@ document.addEventListener("DOMContentLoaded", () => {
     loadPage(currentPage);
   }
 
-   function filterByCategory(category) {
-    if (!category) {
-      loadPage(currentPage);
-      return;
-    }
-  
-    const filteredProducts = originalProducts.filter(
-      (product) => product.category === category
-    );
-    loadFilteredProducts(filteredProducts);
-  }
+  function filterByCategory(category) {
+    if (!category) {
+      loadPage(currentPage);
+      return;
+    }
+    const filteredProducts = originalProducts.filter(
+      (product) => product.category === category
+    );
+    loadFilteredProducts(filteredProducts);
+  }
 
-  function filterByBrand(brand) {
-    if (!brand) {
-      loadPage(currentPage);
-      return;
-    }
-  
-    const filteredProducts = originalProducts.filter(
-      (product) => product.brand === brand
-    );
-    loadFilteredProducts(filteredProducts);
-  }
+  function filterByBrand(brand) {
+    if (!brand) {
+      loadPage(currentPage);
+      return;
+    }
+    const filteredProducts = originalProducts.filter(
+      (product) => product.brand === brand
+    );
+    loadFilteredProducts(filteredProducts);
+  }
 
   function loadFilteredProducts(filteredProducts) {
     products = filteredProducts;
