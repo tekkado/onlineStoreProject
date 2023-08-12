@@ -1,5 +1,5 @@
 function registerUser(userData) {
-    const apiUrl = "http://localhost:8080/api/register";
+    const apiUrl = "http://localhost:8080/api/users/register";
     
     fetch(apiUrl, {
         method: "POST",
