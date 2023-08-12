@@ -1,19 +1,19 @@
 console.log("DOMContentLoaded event triggered");
 document.addEventListener("DOMContentLoaded", () => {
-  let originalProducts = []; 
-  
-  function fetchProducts(callback) {
-    const apiUrl = "http://localhost:8080/api/products";
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((products) => {
-        originalProducts = products; 
-        callback(products);
-      })
-      .catch((error) => {
-        console.error("Error fetching products:", error);
-      });
-  }
+  let originalProducts = [];
+
+  function fetchProducts(callback) {
+    const apiUrl = "http://localhost:8080/api/products";
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((products) => {
+        originalProducts = products;
+        callback(products);
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+      });
+  }
 
   let currentSlideIndex = 0;
   const productsPerPage = 3;
@@ -110,7 +110,15 @@ document.addEventListener("DOMContentLoaded", () => {
       productCard.appendChild(price);
 
       productCard.addEventListener("click", () => {
-        window.location.href = "../html/index.html";
+        const queryParams = new URLSearchParams();
+        queryParams.append("name", product.name);
+        queryParams.append("imageSrc", product.imageSrc);
+        queryParams.append("price", product.price);
+        queryParams.append("category", product.category);
+        queryParams.append("brand", product.brand);
+        queryParams.append("description", product.description);
+
+        window.location.href = `../views/product.html?${queryParams.toString()}`;
       });
 
       productContainer.appendChild(productCard);
@@ -302,29 +310,29 @@ document.addEventListener("DOMContentLoaded", () => {
     loadPage(currentPage);
   }
 
-   function filterByCategory(category) {
-    if (!category) {
-      loadPage(currentPage);
-      return;
-    }
-  
-    const filteredProducts = originalProducts.filter(
-      (product) => product.category === category
-    );
-    loadFilteredProducts(filteredProducts);
-  }
+  function filterByCategory(category) {
+    if (!category) {
+      loadPage(currentPage);
+      return;
+    }
 
-  function filterByBrand(brand) {
-    if (!brand) {
-      loadPage(currentPage);
-      return;
-    }
-  
-    const filteredProducts = originalProducts.filter(
-      (product) => product.brand === brand
-    );
-    loadFilteredProducts(filteredProducts);
-  }
+    const filteredProducts = originalProducts.filter(
+      (product) => product.category === category
+    );
+    loadFilteredProducts(filteredProducts);
+  }
+
+  function filterByBrand(brand) {
+    if (!brand) {
+      loadPage(currentPage);
+      return;
+    }
+
+    const filteredProducts = originalProducts.filter(
+      (product) => product.brand === brand
+    );
+    loadFilteredProducts(filteredProducts);
+  }
 
   function loadFilteredProducts(filteredProducts) {
     products = filteredProducts;
@@ -332,3 +340,71 @@ document.addEventListener("DOMContentLoaded", () => {
     loadPage(1);
   }
 });
+
+// -- cart js --
+const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+const cartItemsContainer = document.getElementById("cart-items");
+const emptyCartMessage = document.getElementById("empty-cart-message");
+const tableHead = document.querySelector("thead");
+const totalElement = document.querySelector(".total p");
+
+function displayCartItems() {
+  cartItemsContainer.innerHTML = "";
+  tableHead.style.display = cartItems.length === 0 ? "none" : "table-header-group";
+
+  let totalPrice = 0;
+
+  if (cartItems.length === 0) {
+    emptyCartMessage.style.display = "block";
+  } else {
+    emptyCartMessage.style.display = "none";
+
+    cartItems.forEach((item, index) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+                              <td>${item.name}</td>
+                              <td>
+                                  <input type="number" value="${item.quantity || 1}">
+                                  <button class="update-quantity" data-index="${index}">Update</button>
+                              </td>
+                              <td>$${item.price.toFixed(2)}</td>
+                              <td class="item-total">$${(item.price * (item.quantity || 1)).toFixed(2)}</td>
+                              <td><button class="remove-item" data-index="${index}">Remove</button></td>
+                          `;
+
+      cartItemsContainer.appendChild(row);
+
+      totalPrice += item.price * (item.quantity || 1);
+    });
+  }
+
+  totalElement.textContent = `Total: $${totalPrice.toFixed(2)}`;
+}
+
+function updateQuantity(index, newQuantity) {
+  const item = cartItems[index];
+  item.quantity = newQuantity;
+  item.total = item.price * newQuantity;
+
+  localStorage.setItem("cart", JSON.stringify(cartItems));
+  displayCartItems();
+}
+
+function removeCartItem(index) {
+  cartItems.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cartItems));
+  displayCartItems();
+}
+
+cartItemsContainer.addEventListener("click", (event) => {
+  if (event.target.classList.contains("update-quantity")) {
+    const index = event.target.getAttribute("data-index");
+    const newQuantity = parseInt(event.target.parentElement.querySelector("input").value);
+    updateQuantity(index, newQuantity);
+  } else if (event.target.classList.contains("remove-item")) {
+    const index = event.target.getAttribute("data-index");
+    removeCartItem(index);
+  }
+});
+
+displayCartItems();

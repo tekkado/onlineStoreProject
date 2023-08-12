@@ -6,11 +6,9 @@
                 <link href="../css/style.css" rel="stylesheet" type="text/css">
               </head>
 <body>
-    <!-- Header section -->
     <header>
             <nav>
                 <div class="logo">
-                    <!-- Your store logo goes here -->
                     <a href="../html/index.html">
                         <img src="../assets/logo.png" alt="mCubed Logo">
                     </a>
@@ -59,35 +57,14 @@
                         <th>Remove</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Display cart items with quantities and prices -->
-                    <tr>
-                        <td>Item 1</td>
-                        <td><input type="number" value="1"></td>
-                        <td>$10.00</td>
-                        <td>$10.00</td>
-                        <td><button>Remove</button></td>
-                    </tr>
-                    <tr>
-                            <td>Item 1</td>
-                            <td><input type="number" value="1"></td>
-                            <td>$10.00</td>
-                            <td>$10.00</td>
-                            <td><button>Remove</button></td>
-                        </tr>
-                        <tr>
-                                <td>Item 1</td>
-                                <td><input type="number" value="1"></td>
-                                <td>$10.00</td>
-                                <td>$10.00</td>
-                                <td><button>Remove</button></td>
-                            </tr>
-                    <!-- Add more rows for other items -->
+                <p id="empty-cart-message" style="display: none;">Your Cart is Empty!</p>
+                <tbody id="cart-items">
+
                 </tbody>
             </table>
             <div class="cart-summary">
             <div class="total">
-                <p>Total: $30.00</p>
+                <p></p>
             </div>
                 <button class="checkout-button">Checkout</button>
             </div>
@@ -145,7 +122,7 @@
             <div class="footer-bottom">
               <p>&copy; 2023 mCubed Online Store. All rights reserved.</p>
             </div>
-          </footer>    
-
+          </footer>   
+          <script src="../js/app.js" type="text/javascript"></script>
 </body>
 </html>

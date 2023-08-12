@@ -269,6 +269,7 @@ main {
   cursor: pointer;
   margin-right: 10px;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 footer {
@@ -531,6 +532,7 @@ footer {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   padding: 20px;
+  min-width: 400px;
 }
 
 .cart-image img {
@@ -626,4 +628,87 @@ label {
 
 .already-have-account a:hover {
   font-weight: bold;
+}
+
+.product-details-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.product-details-box {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  overflow: hidden;
+  width: 500px;
+  margin-right: 50px;
+}
+
+.product-image {
+  flex: 0 0 40%;
+  padding: 2rem;
+}
+
+.product-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.product-details {
+  flex: 1;
+  padding: 2rem;
+  text-align: left;
+}
+
+.product-details h2 {
+  font-size: 24px;
+  margin-bottom: 1rem;
+}
+
+.buttons {
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: #ffca3a;
+  border-radius: 10px;
+  width: 200px;
+}
+
+.buttons:hover {
+  background-color: #ffeb3b;
+  color:black;
+}
+
+.buttons a:hover{
+  color:black;
+}
+
+.goToCartButton {
+  margin-left: auto;
+}
+
+.continue-shopping {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ccc;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+th, td {
+  padding: 12px;
 }
