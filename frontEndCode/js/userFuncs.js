@@ -1,6 +1,27 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector("form");
+    
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        console.log("Form submitted");
+        
+        const userData = {
+            email: document.getElementById("email").value,
+            firstName: document.getElementById("first-name").value,
+            lastName: document.getElementById("last-name").value,
+            username: document.getElementById("username").value,
+            password: document.getElementById("password").value
+        };
+        
+        registerUser(userData);
+    });
+});
+
 function registerUser(userData) {
     const apiUrl = "http://localhost:8080/api/users/register";
-    
+    console.log("Starting registration...");
+
     fetch(apiUrl, {
         method: "POST",
         headers: {
@@ -8,12 +29,38 @@ function registerUser(userData) {
         },
         body: JSON.stringify(userData),
     })
-    .then((response) => response.text())
-    .then((data) => {
-        console.log(data);
+    .then((response) => response.json())
+    .catch((jsonError) => {
+        console.error("JSON parsing error:", jsonError);
     })
-    .catch((error) => {
-        console.error("Error:", error);
+    .then((data) => {
+        console.log("Registration response: ", data);
+        const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+        const userId = data.userId;
+        const updateCartUrl = `http://localhost:8080/api/users/${userId}/cart`;
+        console.log("Registration Successful");
+
+        fetch(updateCartUrl, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(cartItems),
+        })
+            .then((response) => response.text())
+            .then((updateCartData) => {
+                console.log(updateCartData);
+
+                localStorage.removeItem("cart");
+                console.log("Sending to landing page...");
+                window.location.href = "../html/index.html";
+            })
+            .catch((updateCartError) => {
+                console.error("Error updating cart:", updateCartError);
+            });
+    })
+    .catch((registrationError) => {
+        console.error("Error: ", registrationError);
     });
 }
 
@@ -42,29 +89,3 @@ function loginUser(username, password) {
             console.error("Error:", error);
         });
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-    const registerForm = document.getElementById("register-form");
-
-    registerForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        const email = document.getElementById("email").value;
-        const firstName = document.getElementById("first-name").value;
-        const lastName = document.getElementById("last-name").value;
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
-
-        const userData = {
-            email: email,
-            firstName: firstName,
-            lastName: lastName,
-            username: username,
-            password: password,
-        };
-
-        registerUser(userData);
-    });
-});
-
-export { registerUser, loginUser };

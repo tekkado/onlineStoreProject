@@ -8,4 +8,8 @@ import com.mcubed.estore.model.User;
 @Repository
 public interface UserDAO extends JpaRepository<User, Long> {
 	User findByUsername(String username);
+
+	boolean existsByEmail(String email);
+
+	boolean existsByUsername(String username);
 }

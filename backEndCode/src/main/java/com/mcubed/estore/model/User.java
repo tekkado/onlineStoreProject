@@ -1,10 +1,15 @@
 package com.mcubed.estore.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,6 +30,14 @@ public class User {
     private String accPassword;
 	@Column(name = "email")
     private String email;
+	
+	@ManyToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
+
+	@OneToMany(mappedBy = "user")
+    private List<CartItem> cartItems;
+
     
     public Integer getId() {
         return id;
@@ -72,5 +85,21 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public List<CartItem> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
     }
 }
