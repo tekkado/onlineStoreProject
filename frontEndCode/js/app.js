@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let i = start; i < end; i++) {
       const productLink = document.createElement("a");
       productLink.className = "slideCardLink";
-      productLink.href = "product-page.html";
+      productLink.href = `../views/product.html?name=${encodeURIComponent(products[i].name)}&imageSrc=${encodeURIComponent(products[i].imageSrc)}&price=${encodeURIComponent(products[i].price)}&category=${encodeURIComponent(products[i].category)}&brand=${encodeURIComponent(products[i].brand)}&description=${encodeURIComponent(products[i].description)}`;
 
       const productCard = document.createElement("div");
       productCard.className = "slideCard";
