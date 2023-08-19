@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>mCubed Cart</title>
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <!-- Header section -->
+    <header>
+        <nav>
+            <div class="logo">
+                <!-- Your store logo goes here -->
+                <a href="../html/index.html">
+                    <img src="../assets/logo.png" alt="mCubed Logo">
+                </a>
+            </div>
+            <div class="search-bar">
+                <!-- Search bar for product search -->
+                <input type="text" placeholder="Search products...">
+                <button type="submit">Search</button>
+            </div>
+            <ul class="menu">
+                <li><a href="../html/index.html">Home</a></li>
+                <li><a href="../views/catalog.html">Catalog</a></li>
+                <li><a href="../views/cart.html">Cart</a></li>
+                <li class="account-dropdown">
+                    <!-- Dropdown menu for account options -->
+                    <a href="#" class="account">Account</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../views/sign-in.html">Sign In</a></li>
+                        <li><a href="../views/register.html">Register</a></li>
+                        <!-- Show account options only if the user is signed in -->
+                        <li><a href="#">Account Info</a></li>
+                        <li><a href="#">Orders</a></li>
+                        <li><a href="#">Settings</a></li>
+                        <li><a href="#">Sign Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main content section -->
+    <main class="checkout-main">
+        <h1 class="checkout-title">Checkout</h1>
+        <div class="checkout-section">
+            <div class="checkout-form">
+                <!-- Shipping Address section -->
+                <div class="shipping-form">
+                    <h2 class="center-text"> Shipping Address</h2>
+                    <label for="street">Street</label>
+                    <input type="text" id="street" name="street" class="input-field" required>
+                    <label for="province">Province</label>
+                    <input type="text" id="province" name="province" class="input-field" required>
+                    <label for="country">Country</label>
+                    <input type="text" id="country" name="country" class="input-field" required>
+                    <label for="zip">ZIP</label>
+                    <input type="text" id="zip" name="zip" class="input-field" required>
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" class="input-field" required>
+                </div>
+
+                <!-- Payment Method section -->
+                <div class="billing-form">
+                    <h2 class="center-text"> Payment Method</h2>
+                    <label for="card-number">Card Number</label>
+                    <input type="text" id="card-number" name="card-number" class="input-field" required>
+                    <p id="card-error" class="error-message">Sorry, this Card Number is not valid.</p>
+                </div>
+
+                <div class="fix-button">
+                    <button type="submit" class="signup-button" id="confirm-order-button">Confirm Order</button>
+                </div>
+            </div>
+
+            <div class="product-section">
+                <div class="total-price">
+                        <h2 class="center-text">Total Price: <span id="total-price-value">$0.00</span></h2>
+                    </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-products">
+                        <!-- Cart products will be displayed here -->
+                    </tbody>
+                </table>
+                <div class="fix-button">
+                    <a href="../views/cart.html" class="signup-button">Back to Cart</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: mCubed@yorku.ca</p>
+                <p>Phone: (647) 456-7890</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../html/index.html">Home</a></li>
+                    <li><a href="../views/catalog.html">Catalog</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Connect with us</h3>
+                <p>Stay updated on our professional careers!</p>
+                <div class="social-icons">
+                    <div class="icon">
+                        <a href="https://www.linkedin.com/in/shamsminalrahman/" target="_blank">
+                            <img src="../assets/icon-linkedin.svg" alt="Minal's LinkedIn">
+                            Minal's LinkedIn
+                        </a>
+                    </div>
+                    <div class="icon">
+                        <a href="https://www.linkedin.com/in/marko-zivkovic-99276022b/" target="_blank">
+                            <img src="../assets/icon-linkedin.svg" alt="Marko's LinkedIn">
+                            Marko's LinkedIn
+                        </a>
+                    </div>
+                    <div class="icon">
+                        <a href="https://www.linkedin.com/in/mostafa-bander/" target="_blank">
+                            <img src="../assets/icon-linkedin.svg" alt="Mostafa's LinkedIn">
+                            Mostafa's LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023 mCubed Online Store. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+        const totalPriceValue = document.getElementById("total-price-value");
+
+        function populateCheckoutTable() {
+            const cartTableBody = document.getElementById('cart-products');
+
+
+            cartItems.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                        <td>${item.name}</td>
+                        <td>${item.quantity}</td>
+                        <td>${item.price}</td>
+                        <td>${(item.price * item.quantity).toFixed(2)}</td>
+                    `;
+                cartTableBody.appendChild(row);
+            });
+            updateTotalPrice();
+        }
+
+        window.onload = populateCheckoutTable;
+
+        function validateCardNumber(cardNumber) {
+            return /^\d{16}$/.test(cardNumber);
+        }
+
+        const cardNumberInput = document.getElementById("card-number");
+        const confirmOrderButton = document.getElementById("confirm-order-button");
+        const cardError = document.getElementById("card-error");
+
+        confirmOrderButton.addEventListener("click", function (event) {
+            event.preventDefault();
+            cardError.style.display = "none";
+
+            const isValidCardNumber = validateCardNumber(cardNumberInput.value);
+
+            if (!isValidCardNumber) {
+                cardError.style.display = "block";
+            } else {
+                window.location.href = "../html/index.html?orderSuccess=true";
+            }
+        });
+
+        cardNumberInput.addEventListener("input", function() {
+        const isValidCardNumber = validateCardNumber(cardNumberInput.value);
+
+        if (isValidCardNumber) {
+            cardError.style.display = "none";
+        }
+    });
+
+    function updateTotalPrice() {
+        const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+        totalPriceValue.textContent = `$${totalPrice.toFixed(2)}`;
+    }
+
+    </script>
+
+</body>
+
+</html>
