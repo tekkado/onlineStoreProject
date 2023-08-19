@@ -1,3 +1,13 @@
+const urlParams = new URLSearchParams(window.location.search);
+const orderSuccessParam = urlParams.get('orderSuccess');
+
+if (orderSuccessParam === 'true') {
+  const successMessage = document.getElementById('success-message');
+  if (successMessage) {
+    successMessage.style.display = 'block';
+  }
+}
+
 console.log("DOMContentLoaded event triggered");
 document.addEventListener("DOMContentLoaded", () => {
   let originalProducts = [];
@@ -418,3 +428,24 @@ cartItemsContainer.addEventListener("click", (event) => {
 });
 
 displayCartItems();
+
+function populateCheckoutTable() {
+  const cartTableBody = document.getElementById('cart-products');
+
+  cartItems.forEach(item => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+          <td>${item.name}</td>
+          <td>${item.quantity}</td>
+          <td>${item.price}</td>
+          <td>${item.total}</td>
+      `;
+      cartTableBody.appendChild(row);
+  });
+}
+
+// Function to handle checkout button click
+function goToCheckout() {
+  localStorage.setItem("cart", JSON.stringify(cartItems)); // Save cart items
+  window.location.href = "../views/checkout.html";
+}

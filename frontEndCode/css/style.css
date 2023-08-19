@@ -523,6 +523,10 @@ footer {
   background-color: #ffeb3b;
 }
 
+.checkout-button a:hover {
+  color:black;
+}
+
 .cart {
   display: flex;
   align-items: center;
@@ -711,4 +715,73 @@ th, td {
 
 th, td {
   padding: 12px;
+}
+
+.checkout-main {
+  display: flex;
+  padding: 50px;
+}
+
+.checkout-form {
+  flex: 1;
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-radius: 10px;
+  width: 500px;
+  margin-right: 50px;
+}
+
+.shipping-form,
+.billing-form {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.product-section {
+  flex: 1;
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-radius: 10px;
+  margin-left: 50px;
+}
+
+.checkout-section {
+  display: flex;
+}
+
+.checkout-title {
+  font-size: 80px;
+}
+
+.fix-button {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.fix-button a:hover {
+  color: black;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.error-message {
+  display: none;
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+.checkout-form .shipping-form .input-field{
+  margin-bottom: 20px;
+}
+
+.success-message {
+  display:none;
+  color: green;
+  font-size: 50px;
+  font-weight: bold;
 }
