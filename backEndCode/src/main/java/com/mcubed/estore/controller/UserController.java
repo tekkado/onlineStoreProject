@@ -34,8 +34,9 @@ public class UserController {
 			user.setEmail(user.getEmail());
 
 			userService.registerUser(user);
+			loginUser(user);
 
-			return ResponseEntity.ok("User registered successfully.");
+			return ResponseEntity.ok("User registered and logged in successfully.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
