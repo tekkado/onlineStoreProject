@@ -6,8 +6,10 @@ function redirectToHomePage() {
 
 function updateAccountLink() {
     const accountLink = document.querySelector('.account');
-    if (loggedInUser) {
-        accountLink.textContent = loggedInUser;
+    const storedUser = localStorage.getItem("loggedInUser");
+
+    if (storedUser) {
+        accountLink.textContent = storedUser;
     } else {
         accountLink.textContent = "Account";
     }
@@ -28,19 +30,6 @@ function loadComponent(url, containerId) {
 
 loadComponent("../html/navbar.html", "#navbar-container");
 loadComponent("../html/footer.html", "#footer-container");
-
-// function updateDropdownMenu(authenticated) {
-//     const dropdownMenu = document.querySelector(".dropdown-menu");
-//     const dropdownItems = dropdownMenu.querySelectorAll("li");
-
-//     dropdownItems[2].style.display = authenticated ? "none" : "block";
-//     dropdownItems[3].style.display = authenticated ? "none" : "block";
-
-//     dropdownItems[4].style.display = authenticated ? "block" : "none"; // Account Info
-//     dropdownItems[5].style.display = authenticated ? "block" : "none"; // Orders
-//     dropdownItems[6].style.display = authenticated ? "block" : "none"; // Settings
-//     dropdownItems[7].style.display = authenticated ? "block" : "none"; // Sign Out
-// }
 
 // Function to handle user login
 function loginUser(username, password) {
@@ -64,11 +53,11 @@ function loginUser(username, password) {
             console.log("Login response: " + data);
             if (data === "Login successful.") {
                 localStorage.setItem("isLoggedIn", "true");
-                // updateDropdownMenu(true);
-                loggedInUser = username;
+                localStorage.setItem("loggedInUser", username);
+                console.log("this is the username: " + username);
+                updateAccountLink()
+                console.log("this is the loggedInUser: " + localStorage.getItem("loggedInUser"));
                 redirectToHomePage();
-
-                console.log("Login successful");
             } else {
                 console.error("Login failed!");
             }
@@ -112,7 +101,11 @@ function registerUser(userData) {
                 const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
                 const userId = data.userId;
                 const updateCartUrl = `http://localhost:8080/api/users/${userId}/cart`;
+                console.log("this is the username: " + username);
                 loggedInUser = username;
+                localStorage.setItem("loggedInUser", loggedInUser);
+                updateAccountLink()
+                console.log("this is the loggedInUser: " + loggedInUser);
                 redirectToHomePage();
 
                 fetch(updateCartUrl, {
