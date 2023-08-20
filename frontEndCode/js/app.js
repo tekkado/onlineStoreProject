@@ -391,6 +391,16 @@ function displayCartItems() {
   totalElement.textContent = `Total: $${totalPrice.toFixed(2)}`;
 }
 
+function updateCartInLocalStorage() {
+  localStorage.setItem("cart", JSON.stringify(cartItems));
+}
+
+function addToCart(item) {
+  cartItems.push(item);
+  updateCartInLocalStorage();
+  displayCartItems();
+}
+
 function updateQuantity(index, newQuantity) {
   const item = cartItems[index];
   item.quantity = newQuantity;

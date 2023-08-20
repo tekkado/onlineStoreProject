@@ -33,10 +33,13 @@ VALUES
 ('Tim Hortons Keurig Coffee Cup', 29.99, 'Proud to serve you an amazing cup of coffee whether you enjoy it as your morning wakeup call or as an afternoon pick-me-up', 'product-27.jpg', 'Food', 'Tim Hortons'),
 ('Robot Vacuum Cleaner', 299.99, 'Autonomous vacuum cleaner for efficient cleaning', 'product-28.jpg', 'Home', 'iRobot');
 
-INSERT INTO user_account (username, acc_password)
+INSERT INTO user_account (first_name, last_name, username, acc_password, email, address_id, cart_id)
 VALUES
-('admin', 'AdminEECS4413');
+(null, null, 'admin', 'AdminEECS4413', null, null, null);
 
 SELECT * FROM product;
 SELECT * FROM user_account;
 SELECT * FROM address;
+SELECT * FROM cart_item;
+
+DELETE FROM user_account;
