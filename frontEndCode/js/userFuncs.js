@@ -2,21 +2,22 @@ function redirectToHomePage() {
     window.location.href = "../html/index.html";
 }
 
-function updateDropdownMenu(authenticated) {
-    const dropdownMenu = document.querySelector(".dropdown-menu");
-    const dropdownItems = dropdownMenu.querySelectorAll("li");
+// function updateDropdownMenu(authenticated) {
+//     const dropdownMenu = document.querySelector(".dropdown-menu");
+//     const dropdownItems = dropdownMenu.querySelectorAll("li");
 
-    dropdownItems[2].style.display = authenticated ? "none" : "block";
-    dropdownItems[3].style.display = authenticated ? "none" : "block";
+//     dropdownItems[2].style.display = authenticated ? "none" : "block";
+//     dropdownItems[3].style.display = authenticated ? "none" : "block";
 
-    dropdownItems[4].style.display = authenticated ? "block" : "none"; // Account Info
-    dropdownItems[5].style.display = authenticated ? "block" : "none"; // Orders
-    dropdownItems[6].style.display = authenticated ? "block" : "none"; // Settings
-    dropdownItems[7].style.display = authenticated ? "block" : "none"; // Sign Out
-}
+//     dropdownItems[4].style.display = authenticated ? "block" : "none"; // Account Info
+//     dropdownItems[5].style.display = authenticated ? "block" : "none"; // Orders
+//     dropdownItems[6].style.display = authenticated ? "block" : "none"; // Settings
+//     dropdownItems[7].style.display = authenticated ? "block" : "none"; // Sign Out
+// }
 
 // Function to handle user login
 function loginUser(username, password) {
+    const apiUrl = "http://localhost:8080/api/users/login";
     console.log("Login processing...");
 
     const userData = {
@@ -24,7 +25,7 @@ function loginUser(username, password) {
         password: password,
     };
 
-    fetch("/api/users/login", {
+    fetch(apiUrl, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -33,9 +34,10 @@ function loginUser(username, password) {
     })
         .then((response) => response.text())
         .then((data) => {
+            console.log("Login response: " + data);
             if (data === "Login successful.") {
                 localStorage.setItem("isLoggedIn", "true");
-                updateDropdownMenu(true);
+                // updateDropdownMenu(true);
                 redirectToHomePage();
 
                 console.log("Login successful");
