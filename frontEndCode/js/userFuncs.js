@@ -13,7 +13,7 @@ function updateAccountLink() {
     }
 }
 
-//Loading footer and nav
+//Loading footer and nav components
 function loadComponent(url, containerId) {
     fetch(url)
         .then((response) => response.text())
