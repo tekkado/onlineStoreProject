@@ -1,10 +1,10 @@
 const urlParams = new URLSearchParams(window.location.search);
-const orderSuccessParam = urlParams.get('orderSuccess');
+const orderSuccessParam = urlParams.get("orderSuccess");
 
-if (orderSuccessParam === 'true') {
-  const successMessage = document.getElementById('success-message');
+if (orderSuccessParam === "true") {
+  const successMessage = document.getElementById("success-message");
   if (successMessage) {
-    successMessage.style.display = 'block';
+    successMessage.style.display = "block";
   }
 }
 
@@ -24,6 +24,21 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   }
 
+  function loadComponent(url, containerId) {
+    fetch(url)
+      .then((response) => response.text())
+      .then((content) => {
+        const container = document.querySelector(containerId);
+        container.innerHTML = content;
+      })
+      .catch((error) => {
+        console.error("Error loading component:", error);
+      });
+  }
+
+  loadComponent("../html/navbar.html", "#navbar-container");
+  loadComponent("../html/footer.html", "#footer-container");
+
   let currentSlideIndex = 0;
   const productsPerPage = 3;
 
@@ -34,7 +49,17 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let i = start; i < end; i++) {
       const productLink = document.createElement("a");
       productLink.className = "slideCardLink";
-      productLink.href = `../views/product.html?name=${encodeURIComponent(products[i].name)}&imageSrc=${encodeURIComponent(products[i].imageSrc)}&price=${encodeURIComponent(products[i].price)}&category=${encodeURIComponent(products[i].category)}&brand=${encodeURIComponent(products[i].brand)}&description=${encodeURIComponent(products[i].description)}`;
+      productLink.href = `../views/product.html?name=${encodeURIComponent(
+        products[i].name
+      )}&imageSrc=${encodeURIComponent(
+        products[i].imageSrc
+      )}&price=${encodeURIComponent(
+        products[i].price
+      )}&category=${encodeURIComponent(
+        products[i].category
+      )}&brand=${encodeURIComponent(
+        products[i].brand
+      )}&description=${encodeURIComponent(products[i].description)}`;
 
       const productCard = document.createElement("div");
       productCard.className = "slideCard";
@@ -360,7 +385,8 @@ const totalElement = document.querySelector(".total p");
 
 function displayCartItems() {
   cartItemsContainer.innerHTML = "";
-  tableHead.style.display = cartItems.length === 0 ? "none" : "table-header-group";
+  tableHead.style.display =
+    cartItems.length === 0 ? "none" : "table-header-group";
 
   let totalPrice = 0;
 
@@ -374,11 +400,14 @@ function displayCartItems() {
       row.innerHTML = `
                               <td>${item.name}</td>
                               <td>
-                                  <input type="number" value="${item.quantity || 1}">
+                                  <input type="number" value="${item.quantity || 1
+        }">
                                   <button class="update-quantity" data-index="${index}">Update</button>
                               </td>
                               <td>$${item.price.toFixed(2)}</td>
-                              <td class="item-total">$${(item.price * (item.quantity || 1)).toFixed(2)}</td>
+                              <td class="item-total">$${(
+          item.price * (item.quantity || 1)
+        ).toFixed(2)}</td>
                               <td><button class="remove-item" data-index="${index}">Remove</button></td>
                           `;
 
@@ -419,7 +448,9 @@ function removeCartItem(index) {
 cartItemsContainer.addEventListener("click", (event) => {
   if (event.target.classList.contains("update-quantity")) {
     const index = event.target.getAttribute("data-index");
-    const newQuantity = parseInt(event.target.parentElement.querySelector("input").value);
+    const newQuantity = parseInt(
+      event.target.parentElement.querySelector("input").value
+    );
     updateQuantity(index, newQuantity);
   } else if (event.target.classList.contains("remove-item")) {
     const index = event.target.getAttribute("data-index");
@@ -430,17 +461,17 @@ cartItemsContainer.addEventListener("click", (event) => {
 displayCartItems();
 
 function populateCheckoutTable() {
-  const cartTableBody = document.getElementById('cart-products');
+  const cartTableBody = document.getElementById("cart-products");
 
-  cartItems.forEach(item => {
-      const row = document.createElement('tr');
-      row.innerHTML = `
+  cartItems.forEach((item) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
           <td>${item.name}</td>
           <td>${item.quantity}</td>
           <td>${item.price}</td>
           <td>${item.total}</td>
       `;
-      cartTableBody.appendChild(row);
+    cartTableBody.appendChild(row);
   });
 }
 
