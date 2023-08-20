@@ -13,6 +13,22 @@ function updateAccountLink() {
     }
 }
 
+//Loading footer and nav
+function loadComponent(url, containerId) {
+    fetch(url)
+        .then((response) => response.text())
+        .then((content) => {
+            const container = document.querySelector(containerId);
+            container.innerHTML = content;
+        })
+        .catch((error) => {
+            console.error("Error loading component:", error);
+        });
+}
+
+loadComponent("../html/navbar.html", "#navbar-container");
+loadComponent("../html/footer.html", "#footer-container");
+
 // function updateDropdownMenu(authenticated) {
 //     const dropdownMenu = document.querySelector(".dropdown-menu");
 //     const dropdownItems = dropdownMenu.querySelectorAll("li");
