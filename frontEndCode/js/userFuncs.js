@@ -1,5 +1,16 @@
+var loggedInUser = "";
+
 function redirectToHomePage() {
     window.location.href = "../html/index.html";
+}
+
+function updateAccountLink() {
+    const accountLink = document.querySelector('.account');
+    if (loggedInUser) {
+        accountLink.textContent = loggedInUser;
+    } else {
+        accountLink.textContent = "Account";
+    }
 }
 
 // function updateDropdownMenu(authenticated) {
@@ -38,6 +49,7 @@ function loginUser(username, password) {
             if (data === "Login successful.") {
                 localStorage.setItem("isLoggedIn", "true");
                 // updateDropdownMenu(true);
+                loggedInUser = username;
                 redirectToHomePage();
 
                 console.log("Login successful");
@@ -84,6 +96,7 @@ function registerUser(userData) {
                 const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
                 const userId = data.userId;
                 const updateCartUrl = `http://localhost:8080/api/users/${userId}/cart`;
+                loggedInUser = username;
                 redirectToHomePage();
 
                 fetch(updateCartUrl, {

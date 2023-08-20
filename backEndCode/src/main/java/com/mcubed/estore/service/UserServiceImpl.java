@@ -18,6 +18,9 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
     private UserDAO userDao;
+	
+	@Autowired
+    private SessionService sessionService;
 
 	@Transactional
 	@Override
@@ -31,13 +34,19 @@ public class UserServiceImpl implements UserService{
         	throw new EmailTakenException("Email is already registered.");
         }
 		userDao.save(user);
+		sessionService.setLoggedInUser(user.getUsername());
 	}
 
 	@Override
 	public boolean validateUser(String username, String accPassword) {
 		// TODO Auto-generated method stub
 		User existingUser = userDao.findByUsername(username);
-        return existingUser != null && existingUser.getPassword().equals(accPassword);
+		if (existingUser != null && existingUser.getPassword().equals(accPassword)) {
+            sessionService.setLoggedInUser(username);
+            return true;
+        }
+
+        return false;
 	}
 	
 	@Override
