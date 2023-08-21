@@ -1,15 +1,16 @@
 var loggedInUser = "";
 
 function redirectToHomePage() {
-    window.location.href = "../html/index.html";
+    window.location.href = `../html/index.html?username=${username}`;
 }
 
 function updateAccountLink() {
     const accountLink = document.querySelector('.account');
-    const storedUser = localStorage.getItem("loggedInUser");
+    const urlParams = new URLSearchParams(window.location.search);
+    const loggedUser = urlParams.get('username');
 
-    if (storedUser) {
-        accountLink.textContent = storedUser;
+    if (loggedUser) {
+        accountLink.textContent = loggedUser;
     } else {
         accountLink.textContent = "Account";
     }
@@ -28,8 +29,10 @@ function loadComponent(url, containerId) {
         });
 }
 
-loadComponent("../html/navbar.html", "#navbar-container");
-loadComponent("../html/footer.html", "#footer-container");
+document.addEventListener("DOMContentLoaded", () => {
+    loadComponent("../html/navbar.html", "#navbar-container");
+    loadComponent("../html/footer.html", "#footer-container");
+});
 
 // Function to handle user login
 function loginUser(username, password) {
@@ -52,11 +55,8 @@ function loginUser(username, password) {
         .then((data) => {
             console.log("Login response: " + data);
             if (data === "Login successful.") {
-                localStorage.setItem("isLoggedIn", "true");
-                localStorage.setItem("loggedInUser", username);
                 console.log("this is the username: " + username);
-                updateAccountLink()
-                console.log("this is the loggedInUser: " + localStorage.getItem("loggedInUser"));
+                updateAccountLink();
                 redirectToHomePage();
             } else {
                 console.error("Login failed!");
@@ -101,30 +101,26 @@ function registerUser(userData) {
                 const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
                 const userId = data.userId;
                 const updateCartUrl = `http://localhost:8080/api/users/${userId}/cart`;
-                console.log("this is the username: " + username);
-                loggedInUser = username;
-                localStorage.setItem("loggedInUser", loggedInUser);
                 updateAccountLink()
-                console.log("this is the loggedInUser: " + loggedInUser);
                 redirectToHomePage();
 
-                fetch(updateCartUrl, {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(cartItems),
-                })
-                    .then((response) => response.text())
-                    .then((updateCartData) => {
-                        console.log(updateCartData);
+                // fetch(updateCartUrl, {
+                //     method: "PUT",
+                //     headers: {
+                //         "Content-Type": "application/json",
+                //     },
+                //     body: JSON.stringify(cartItems),
+                // })
+                //     .then((response) => response.text())
+                //     .then((updateCartData) => {
+                //         console.log(updateCartData);
 
-                        localStorage.removeItem("cart");
-                        updateDropdownMenu(true);
-                    })
-                    .catch((updateCartError) => {
-                        console.error("Error updating cart:", updateCartError);
-                    });
+                //         localStorage.removeItem("cart");
+                //         updateDropdownMenu(true);
+                //     })
+                //     .catch((updateCartError) => {
+                //         console.error("Error updating cart:", updateCartError);
+                //     });
             }
         })
         .catch((registrationError) => {
