@@ -7,15 +7,15 @@ function changeAccountDropdown(loggedIn) {
     
     if (loggedIn) {
         dropdownMenu.innerHTML = `
-            <li><a href="#">Account Info</a></li>
-            <li><a href="#">Orders</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Sign Out</a></li>
+        <li><a class="menu-button" href="#">Account Info</a></li>
+        <li><a class="menu-button" href="#">Orders</a></li>
+        <li><a class="menu-button" href="#">Settings</a></li>
+        <li><a class="signout-button" onclick="signOutUser()">Sign Out</a></li>
         `;
     } else {
         dropdownMenu.innerHTML = `
-            <li><a href="../views/sign-in.html">Sign In</a></li>
-            <li><a href="../views/register.html">Register</a></li>
+        <li><a class="menu-button" href="../views/sign-in.html">Sign In</a></li>
+        <li><a class="menu-button" href="../views/register.html">Register</a></li>
         `;
     }
 }
@@ -123,6 +123,13 @@ function registerUser(userData) {
         .catch((registrationError) => {
             console.error("Error: ", registrationError);
         });
+}
+
+function signOutUser() {
+    localStorage.removeItem("loggedInUser");
+    changeAccountToUsername();
+    console.log("Signing out...");
+    redirectToHomePage();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
