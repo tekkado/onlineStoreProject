@@ -2,6 +2,24 @@ console.log("LogIn/Register functions triggered");
 
 var loggedInUser = "";
 
+function changeAccountDropdown(loggedIn) {
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+    
+    if (loggedIn) {
+        dropdownMenu.innerHTML = `
+        <li><a class="menu-button" href="#">Account Info</a></li>
+        <li><a class="menu-button" href="#">Orders</a></li>
+        <li><a class="menu-button" href="#">Settings</a></li>
+        <li><a class="signout-button" onclick="signOutUser()">Sign Out</a></li>
+        `;
+    } else {
+        dropdownMenu.innerHTML = `
+        <li><a class="menu-button" href="../views/sign-in.html">Sign In</a></li>
+        <li><a class="menu-button" href="../views/register.html">Register</a></li>
+        `;
+    }
+}
+
 function redirectToHomePage() {
     console.log("Redirecting to homepage");
     changeAccountToUsername();
@@ -14,8 +32,10 @@ function changeAccountToUsername() {
 
     if (storedUser) {
         accountLink.textContent = storedUser;
+        changeAccountDropdown(true); // Show account options
     } else {
         accountLink.textContent = "Account";
+        changeAccountDropdown(false); // Show Sign In and Register
     }
 }
 
