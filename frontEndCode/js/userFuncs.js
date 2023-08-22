@@ -1,16 +1,19 @@
+console.log("LogIn/Register functions triggered");
+
 var loggedInUser = "";
 
 function redirectToHomePage() {
-    window.location.href = `../html/index.html?username=${username}`;
+    console.log("Redirecting to homepage");
+    changeAccountToUsername();
+    window.location.href = "../html/index.html";
 }
 
-function updateAccountLink() {
+function changeAccountToUsername() {
     const accountLink = document.querySelector('.account');
-    const urlParams = new URLSearchParams(window.location.search);
-    const loggedUser = urlParams.get('username');
+    const storedUser = localStorage.getItem("loggedInUser");
 
-    if (loggedUser) {
-        accountLink.textContent = loggedUser;
+    if (storedUser) {
+        accountLink.textContent = storedUser;
     } else {
         accountLink.textContent = "Account";
     }
@@ -23,16 +26,16 @@ function loadComponent(url, containerId) {
         .then((content) => {
             const container = document.querySelector(containerId);
             container.innerHTML = content;
+            changeAccountToUsername();
         })
         .catch((error) => {
             console.error("Error loading component:", error);
         });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    loadComponent("../html/navbar.html", "#navbar-container");
-    loadComponent("../html/footer.html", "#footer-container");
-});
+loadComponent("../html/navbar.html", "#navbar-container");
+loadComponent("../html/footer.html", "#footer-container");
+
 
 // Function to handle user login
 function loginUser(username, password) {
@@ -55,9 +58,14 @@ function loginUser(username, password) {
         .then((data) => {
             console.log("Login response: " + data);
             if (data === "Login successful.") {
+                localStorage.setItem("loggedInUser", username);
                 console.log("this is the username: " + username);
-                updateAccountLink();
+                console.log("Account text in navbar before update: " + document.querySelector('.account').textContent);
+                changeAccountToUsername();
+                console.log("this is the loggedInUser: " + localStorage.getItem("loggedInUser"));
+                console.log("After update, before redirect: " + document.querySelector('.account').textContent);
                 redirectToHomePage();
+                console.log("After redirect: " + document.querySelector('.account').textContent);
             } else {
                 console.error("Login failed!");
             }
@@ -66,20 +74,6 @@ function loginUser(username, password) {
             console.error("Error:", error);
         });
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    const loginForm = document.querySelector("#login-form");
-
-    loginForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        console.log("Login form submitted");
-
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
-        loginUser(username, password);
-    });
-});
 
 // Function to handle user registration
 function registerUser(userData) {
@@ -98,29 +92,12 @@ function registerUser(userData) {
             console.log("Registration response: ", data);
 
             if (data === "User registered and logged in successfully.") {
-                const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-                const userId = data.userId;
-                const updateCartUrl = `http://localhost:8080/api/users/${userId}/cart`;
-                updateAccountLink()
+                console.log("this is the username: " + userData.username);
+                loggedInUser = userData.username;
+                localStorage.setItem("loggedInUser", loggedInUser);
+                changeAccountToUsername();
+                console.log("this is the loggedInUser: " + loggedInUser);
                 redirectToHomePage();
-
-                // fetch(updateCartUrl, {
-                //     method: "PUT",
-                //     headers: {
-                //         "Content-Type": "application/json",
-                //     },
-                //     body: JSON.stringify(cartItems),
-                // })
-                //     .then((response) => response.text())
-                //     .then((updateCartData) => {
-                //         console.log(updateCartData);
-
-                //         localStorage.removeItem("cart");
-                //         updateDropdownMenu(true);
-                //     })
-                //     .catch((updateCartError) => {
-                //         console.error("Error updating cart:", updateCartError);
-                //     });
             }
         })
         .catch((registrationError) => {
@@ -129,6 +106,22 @@ function registerUser(userData) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    //LogIn Listener
+    const loginForm = document.querySelector("#login-form");
+
+    loginForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        console.log("Login form submitted");
+
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        loginUser(username, password);
+    });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    //Registration Listener
     const registerForm = document.querySelector("#register-form");
 
     registerForm.addEventListener("submit", function (event) {
