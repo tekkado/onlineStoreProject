@@ -45,6 +45,7 @@
         </div>
     </footer>
 
+    <script src="../js/userFuncs.js" type="text/javascript"></script>
     <script>
         const urlSearchParams = new URLSearchParams(window.location.search);
         const productName = urlSearchParams.get("name");
@@ -95,21 +96,6 @@
             localStorage.setItem("cart", JSON.stringify(cartItems));
             displayCartItems();
         });
-
-        function loadComponent(url, containerId) {
-            fetch(url)
-                .then((response) => response.text())
-                .then((content) => {
-                    const container = document.querySelector(containerId);
-                    container.innerHTML = content;
-                })
-                .catch((error) => {
-                    console.error("Error loading component:", error);
-                });
-        }
-
-        loadComponent("../html/navbar.html", "#navbar-container");
-        loadComponent("../html/footer.html", "#footer-container");
     </script>
 </body>
 

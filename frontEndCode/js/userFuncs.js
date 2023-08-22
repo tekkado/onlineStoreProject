@@ -1,25 +1,32 @@
+console.log("LogIn/Register functions triggered");
+
 var loggedInUser = "";
 
 function redirectToHomePage() {
+    console.log("Redirecting to homepage");
+    changeAccountToUsername();
     window.location.href = "../html/index.html";
 }
 
-function updateAccountLink() {
+function changeAccountToUsername() {
     const accountLink = document.querySelector('.account');
-    if (loggedInUser) {
-        accountLink.textContent = loggedInUser;
+    const storedUser = localStorage.getItem("loggedInUser");
+
+    if (storedUser) {
+        accountLink.textContent = storedUser;
     } else {
         accountLink.textContent = "Account";
     }
 }
 
-//Loading footer and nav
+//Loading footer and nav components
 function loadComponent(url, containerId) {
     fetch(url)
         .then((response) => response.text())
         .then((content) => {
             const container = document.querySelector(containerId);
             container.innerHTML = content;
+            changeAccountToUsername();
         })
         .catch((error) => {
             console.error("Error loading component:", error);
@@ -29,18 +36,6 @@ function loadComponent(url, containerId) {
 loadComponent("../html/navbar.html", "#navbar-container");
 loadComponent("../html/footer.html", "#footer-container");
 
-// function updateDropdownMenu(authenticated) {
-//     const dropdownMenu = document.querySelector(".dropdown-menu");
-//     const dropdownItems = dropdownMenu.querySelectorAll("li");
-
-//     dropdownItems[2].style.display = authenticated ? "none" : "block";
-//     dropdownItems[3].style.display = authenticated ? "none" : "block";
-
-//     dropdownItems[4].style.display = authenticated ? "block" : "none"; // Account Info
-//     dropdownItems[5].style.display = authenticated ? "block" : "none"; // Orders
-//     dropdownItems[6].style.display = authenticated ? "block" : "none"; // Settings
-//     dropdownItems[7].style.display = authenticated ? "block" : "none"; // Sign Out
-// }
 
 // Function to handle user login
 function loginUser(username, password) {
@@ -63,12 +58,14 @@ function loginUser(username, password) {
         .then((data) => {
             console.log("Login response: " + data);
             if (data === "Login successful.") {
-                localStorage.setItem("isLoggedIn", "true");
-                // updateDropdownMenu(true);
-                loggedInUser = username;
+                localStorage.setItem("loggedInUser", username);
+                console.log("this is the username: " + username);
+                console.log("Account text in navbar before update: " + document.querySelector('.account').textContent);
+                changeAccountToUsername();
+                console.log("this is the loggedInUser: " + localStorage.getItem("loggedInUser"));
+                console.log("After update, before redirect: " + document.querySelector('.account').textContent);
                 redirectToHomePage();
-
-                console.log("Login successful");
+                console.log("After redirect: " + document.querySelector('.account').textContent);
             } else {
                 console.error("Login failed!");
             }
@@ -77,20 +74,6 @@ function loginUser(username, password) {
             console.error("Error:", error);
         });
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    const loginForm = document.querySelector("#login-form");
-
-    loginForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        console.log("Login form submitted");
-
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
-        loginUser(username, password);
-    });
-});
 
 // Function to handle user registration
 function registerUser(userData) {
@@ -109,29 +92,12 @@ function registerUser(userData) {
             console.log("Registration response: ", data);
 
             if (data === "User registered and logged in successfully.") {
-                const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-                const userId = data.userId;
-                const updateCartUrl = `http://localhost:8080/api/users/${userId}/cart`;
-                loggedInUser = username;
+                console.log("this is the username: " + userData.username);
+                loggedInUser = userData.username;
+                localStorage.setItem("loggedInUser", loggedInUser);
+                changeAccountToUsername();
+                console.log("this is the loggedInUser: " + loggedInUser);
                 redirectToHomePage();
-
-                fetch(updateCartUrl, {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(cartItems),
-                })
-                    .then((response) => response.text())
-                    .then((updateCartData) => {
-                        console.log(updateCartData);
-
-                        localStorage.removeItem("cart");
-                        updateDropdownMenu(true);
-                    })
-                    .catch((updateCartError) => {
-                        console.error("Error updating cart:", updateCartError);
-                    });
             }
         })
         .catch((registrationError) => {
@@ -140,6 +106,22 @@ function registerUser(userData) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    //LogIn Listener
+    const loginForm = document.querySelector("#login-form");
+
+    loginForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        console.log("Login form submitted");
+
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        loginUser(username, password);
+    });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    //Registration Listener
     const registerForm = document.querySelector("#register-form");
 
     registerForm.addEventListener("submit", function (event) {

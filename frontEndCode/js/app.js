@@ -8,7 +8,7 @@ if (orderSuccessParam === "true") {
   }
 }
 
-console.log("DOMContentLoaded event triggered");
+console.log("Product functions + DOMContentLoaded triggered");
 document.addEventListener("DOMContentLoaded", () => {
   let originalProducts = [];
   function fetchProducts(callback) {
@@ -23,21 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Error fetching products:", error);
       });
   }
-
-  function loadComponent(url, containerId) {
-    fetch(url)
-      .then((response) => response.text())
-      .then((content) => {
-        const container = document.querySelector(containerId);
-        container.innerHTML = content;
-      })
-      .catch((error) => {
-        console.error("Error loading component:", error);
-      });
-  }
-
-  loadComponent("../html/navbar.html", "#navbar-container");
-  loadComponent("../html/footer.html", "#footer-container");
 
   let currentSlideIndex = 0;
   const productsPerPage = 3;

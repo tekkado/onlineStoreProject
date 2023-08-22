@@ -28,7 +28,6 @@ CREATE TABLE user_account (
     cart_id INT,
     FOREIGN KEY (address_id) REFERENCES address(id)
 );
-ALTER TABLE user_account ADD CONSTRAINT fk_user_cart FOREIGN KEY (cart_id) REFERENCES cart_item(id);
 
 CREATE TABLE cart_item (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -38,6 +37,8 @@ CREATE TABLE cart_item (
     FOREIGN KEY (user_id) REFERENCES user_account(id),
     FOREIGN KEY (product_id) REFERENCES product(id)
 );
+
+ALTER TABLE user_account ADD CONSTRAINT fk_user_cart FOREIGN KEY (cart_id) REFERENCES cart_item(id);
 
 describe user_account;
 describe cart_item;
