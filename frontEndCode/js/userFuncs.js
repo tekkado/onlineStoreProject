@@ -105,6 +105,13 @@ function registerUser(userData) {
         });
 }
 
+function signOutUser() {
+    localStorage.removeItem("loggedInUser");
+    changeAccountToUsername();
+    console.log("Signing out...");
+    redirectToHomePage();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     //LogIn Listener
     const loginForm = document.querySelector("#login-form");
