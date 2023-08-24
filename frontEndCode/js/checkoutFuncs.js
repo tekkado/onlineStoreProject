@@ -39,6 +39,7 @@ confirmOrderButton.addEventListener("click", function (event) {
     if (!isValidCardNumber) {
         cardError.style.display = "block";
     } else {
+        localStorage.removeItem("cart");
         window.location.href = "../html/index.html?orderSuccess=true";
     }
 });
