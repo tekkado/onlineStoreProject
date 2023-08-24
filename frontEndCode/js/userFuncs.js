@@ -87,6 +87,7 @@ function loginUser(username, password) {
                 redirectToHomePage();
                 console.log("After redirect: " + document.querySelector('.account').textContent);
             } else {
+                alert("Wrong password or username!");
                 console.error("Login failed!");
             }
         })
@@ -118,6 +119,8 @@ function registerUser(userData) {
                 changeAccountToUsername();
                 console.log("this is the loggedInUser: " + loggedInUser);
                 redirectToHomePage();
+            } else {
+                alert("Email or Username unavailable!");
             }
         })
         .catch((registrationError) => {
