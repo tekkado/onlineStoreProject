@@ -773,8 +773,16 @@ th, td {
   display: none;
   color: red;
   font-size: 14px;
+}
+
+#card-error {
   margin-top: 5px;
 }
+
+#street-error, #province-error, #country-error, #zip-error, #phone-error {
+  margin-top: -15px;
+}
+
 .checkout-form .shipping-form .input-field{
   margin-bottom: 20px;
 }
