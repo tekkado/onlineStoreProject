@@ -460,8 +460,16 @@ function populateCheckoutTable() {
   });
 }
 
-// Function to handle checkout button click
+// if not logged in or cart is empty, send alerts instead of checking out
 function goToCheckout() {
-  localStorage.setItem("cart", JSON.stringify(cartItems)); // Save cart items
-  window.location.href = "../views/checkout.html";
+  console.log(cartItems.length);
+  if (localStorage.getItem("loggedInUser") == null){ 
+    alert("Please Login or Register!")
+  }
+  else if (cartItems.length === 0) {
+    alert("Your Cart is Empty!");
+  } else {
+    localStorage.setItem("cart", JSON.stringify(cartItems)); 
+    window.location.href = "../views/checkout.html";
+  }
 }
