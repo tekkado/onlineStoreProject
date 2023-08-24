@@ -50,7 +50,9 @@ function validateForm() {
     } else {
         phoneError.style.display = "none";
     }
-
+    if (!valid) {
+        alert("Please fill in empty fields!")
+    }
     return valid;
 }
 
