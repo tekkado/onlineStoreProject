@@ -26,15 +26,18 @@ CREATE TABLE user_account (
     email VARCHAR(255),
     address_id INT,
     cart_id INT,
-    FOREIGN KEY (address_id) REFERENCES address(id)
+    FOREIGN KEY (address_id) REFERENCES address(id),
+    INDEX (username)
 );
 
 CREATE TABLE cart_item (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT,
+    username VARCHAR(255),
     product_id INT,
+    product_name VARCHAR(255) NOT NULL,
+    product_price DECIMAL(10, 2) NOT NULL,
     quantity INT,
-    FOREIGN KEY (user_id) REFERENCES user_account(id),
+    FOREIGN KEY (username) REFERENCES user_account(username),
     FOREIGN KEY (product_id) REFERENCES product(id)
 );
 
@@ -46,7 +49,7 @@ describe cart_item;
 ALTER TABLE user_account DROP FOREIGN KEY fk_user_cart;
 ALTER TABLE cart_item DROP FOREIGN KEY user_id;
 ALTER TABLE cart_item DROP FOREIGN KEY product_id;
+DROP TABLE IF EXISTS cart_item;
 DROP TABLE IF EXISTS product;
 DROP TABLE IF EXISTS user_account;
-DROP TABLE IF EXISTS cart_item;
 DROP TABLE IF EXISTS address;

@@ -83,12 +83,10 @@ const confirmOrderButton = document.getElementById("confirm-order-button");
 const cardError = document.getElementById("card-error");
 
 confirmOrderButton.addEventListener("click", function (event) {
-    console.log("CLICKED");
     event.preventDefault();
     cardError.style.display = "none";
 
     const isValidCardNumber = validateCardNumber(cardNumberInput.value);
-    console.log("HELLO");
     const isFormValid = validateForm();
     console.log(isValidCardNumber);
     if (!isValidCardNumber) {
@@ -100,8 +98,8 @@ confirmOrderButton.addEventListener("click", function (event) {
             user: loggedInUser.id,
             items: cartItems
         };
-        const apiUrl = "http://localhost:8080/api/cart";
 
+        const apiUrl = "http://localhost:8080/api/cart";
         fetch(apiUrl, {
             method: "POST",
             headers: {
@@ -109,19 +107,19 @@ confirmOrderButton.addEventListener("click", function (event) {
             },
             body: JSON.stringify(checkoutData)
         })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    localStorage.removeItem("cart");
-                    window.location.href = "../html/index.html?orderSuccess=true";
-                } else {
-                    alert("Checkout failed. Please try again later.");
-                }
-            })
-            .catch(error => {
-                console.error("Error during checkout:", error);
-                alert("An error occurred during checkout. Please try again later.");
-            });
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                localStorage.removeItem("cart");
+                window.location.href = "../html/index.html?orderSuccess=true";
+            } else {
+                alert("Checkout failed. Please try again later.");
+            }
+        })
+        .catch(error => {
+            console.error("Error during checkout:", error);
+            alert("An error occurred during checkout. Please try again later.");
+        });
     }
 
     if (isFormValid && isValidCardNumber) {
