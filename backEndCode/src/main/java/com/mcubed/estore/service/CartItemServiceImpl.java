@@ -33,13 +33,13 @@ public class CartItemServiceImpl implements CartItemService {
 	}
 
 	@Override
-	public void addCartItem(String username, CartItem cartItem) {
+	public void addCartItem(String username, String itemName, CartItem cartItem) {
 		// TODO Auto-generated method stub
 		User user = userDao.findByUsername(username);
 		if (user != null) {
-			String productName = cartItem.getProductName();
-            Product product = prodDao.findRowByProductName(productName);
-            System.out.print("poggers " + product);
+			String productName = itemName;
+            Product product = prodDao.findByProdName(productName);
+            System.out.print("poggers this is name " + productName);
             
             if (product != null) {
                 cartItem.setUser(user);

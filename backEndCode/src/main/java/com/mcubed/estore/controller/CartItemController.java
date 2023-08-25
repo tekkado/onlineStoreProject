@@ -43,9 +43,11 @@ public class CartItemController {
         boolean allItemsInserted = true;
 
         for (CartItem item : checkoutRequest.getItems()) {
-            item.setUser(loggedInUsername); // Set the user for the cart item
-            cartItemService.addCartItem(checkoutRequest.getUsername(), item);
-           
+        	System.out.print("this is cartlist "+checkoutRequest.getItems());
+            item.setUser(loggedInUsername);// Set the user for the cart item
+            String productName = item.getProductName(); // Get the product name from the item
+            item.setProductName(productName);
+            cartItemService.addCartItem(checkoutRequest.getUsername(), productName, item);
         }
 
         Map<String, Object> response = new HashMap<>();
