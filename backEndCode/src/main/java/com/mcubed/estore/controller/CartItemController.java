@@ -25,12 +25,15 @@ public class CartItemController {
 
     @Autowired
     private CartItemService cartItemService;
+    
+    @Autowired
     private UserDAO userDao;
     
     @PostMapping("/checkout")
     public ResponseEntity<Map<String, Object>> checkout(@RequestBody CheckoutRequest checkoutRequest) {
         // Retrieve logged-in user's username from local storage
     	User loggedInUsername = userDao.findByUsername(checkoutRequest.getUsername());
+    	
 
         if (loggedInUsername == null) {
             // User not logged in
@@ -41,7 +44,7 @@ public class CartItemController {
 
         for (CartItem item : checkoutRequest.getItems()) {
             item.setUser(loggedInUsername); // Set the user for the cart item
-            cartItemService.addCartItem(loggedInUsername, item);
+            cartItemService.addCartItem(checkoutRequest.getUsername(), item);
            
         }
 

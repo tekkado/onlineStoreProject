@@ -49,7 +49,7 @@ public class CartItem {
 		return product_name;
 	}
 
-	public void setProductId(String product_name) {
+	public void setProductName(String product_name) {
 		this.product_name = product_name;
 	}
 

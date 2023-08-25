@@ -19,7 +19,11 @@ public class CartItemServiceImpl implements CartItemService {
 
 	@Autowired
 	private CartItemDAO cartItemDao;
+	
+	@Autowired
 	private UserDAO userDao;
+	
+	@Autowired
 	private ProductDAO prodDao;
 
 	@Override
@@ -34,11 +38,12 @@ public class CartItemServiceImpl implements CartItemService {
 		User user = userDao.findByUsername(username);
 		if (user != null) {
 			String productName = cartItem.getProductName();
-            Product productId = prodDao.findProductIdByProdName(productName);
+            Product product = prodDao.findRowByProductName(productName);
+            System.out.print("poggers " + product);
             
-            if (productId != null) {
+            if (product != null) {
                 cartItem.setUser(user);
-                cartItem.setProduct(productId);
+                cartItem.setProduct(product);
                 cartItemDao.save(cartItem);
             } else {
             	throw new ProductNotFoundException("Product not found with name: " + productName);
