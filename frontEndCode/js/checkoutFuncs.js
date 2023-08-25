@@ -85,23 +85,28 @@ const confirmOrderButton = document.getElementById(
 const cardError = document.getElementById("card-error");
 
 confirmOrderButton.addEventListener("click", function (event) {
-    console.log("CLICKED");
     event.preventDefault();
     cardError.style.display = "none";
 
     const isValidCardNumber = validateCardNumber(cardNumberInput.value);
-    console.log("HELLO");
     const isFormValid = validateForm();
-    console.log(isValidCardNumber);
+
     if (!isValidCardNumber) {
         cardError.style.display = "block";
-        console.log("CHECK 1");
     }
 
     if (isFormValid && isValidCardNumber) {
+        // Retrieve existing checkout tables or initialize an empty array
+        const existingCheckoutTables = JSON.parse(localStorage.getItem("checkoutTables")) || [];
+
+        // Add the current cart data as a new checkout table
+        existingCheckoutTables.push(cartItems);
+
+        // Store the updated checkout tables in localStorage
+        localStorage.setItem("checkoutTables", JSON.stringify(existingCheckoutTables));
+
         localStorage.removeItem("cart");
         window.location.href = "../html/index.html?orderSuccess=true";
-        console.log("CHECK 2");
     }
 });
 
