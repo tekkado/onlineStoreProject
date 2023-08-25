@@ -85,23 +85,27 @@ const confirmOrderButton = document.getElementById(
 const cardError = document.getElementById("card-error");
 
 confirmOrderButton.addEventListener("click", function (event) {
-    console.log("CLICKED");
     event.preventDefault();
     cardError.style.display = "none";
 
     const isValidCardNumber = validateCardNumber(cardNumberInput.value);
-    console.log("HELLO");
     const isFormValid = validateForm();
-    console.log(isValidCardNumber);
+
     if (!isValidCardNumber) {
         cardError.style.display = "block";
-        console.log("CHECK 1");
     }
 
     if (isFormValid && isValidCardNumber) {
+        const loggedInUser = localStorage.getItem("loggedInUser");
+        const checkoutData = JSON.parse(localStorage.getItem("checkoutData")) || [];
+
+        const checkout = { username: loggedInUser, items: cartItems };
+        checkoutData.push(checkout);
+
+        localStorage.setItem("checkoutData", JSON.stringify(checkoutData));
+
         localStorage.removeItem("cart");
         window.location.href = "../html/index.html?orderSuccess=true";
-        console.log("CHECK 2");
     }
 });
 
