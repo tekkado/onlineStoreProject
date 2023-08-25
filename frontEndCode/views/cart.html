@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>mCubed Cart</title>
+  <link href="../css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header>
+    <nav id="navbar-container">
+      <!-- Navbar will be inserted here -->
+    </nav>
+  </header>
+
+  <!-- Main content section -->
+  <main>
+    <div>
+      <div class="cart-image">
+        <img src="../assets/shopping-cart.svg" alt="Shopping Cart Image">
+      </div>
+      <h1 class="cart-title">Your Shopping Cart</h1>
+      <div class="cart">
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Total</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <p id="empty-cart-message" style="display: none;">Your Cart is Empty!</p>
+          <tbody id="cart-items">
+
+          </tbody>
+        </table>
+        <div class="cart-summary">
+          <div class="total">
+            <p></p>
+          </div>
+          <button class="checkout-button" onclick="goToCheckout()">Checkout</button>
+        </div>
+      </div>
+      <p class="continue-shopping"><a href="../views/catalog.html">Back to Shopping!</a></p>
+    </div>
+  </main>
+
+  <footer>
+    <div id="footer-container">
+      <!-- Footer will be inserted here -->
+    </div>
+  </footer>
+  
+  <script src="../js/app.js" type="text/javascript"></script>
+  <script src="../js/userFuncs.js" type="text/javascript"></script>
+</body>
+
+</html>
