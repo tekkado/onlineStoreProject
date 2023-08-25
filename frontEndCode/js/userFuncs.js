@@ -8,7 +8,7 @@ function changeAccountDropdown(loggedIn) {
     if (loggedIn) {
         dropdownMenu.innerHTML = `
         <li><a class="menu-button" href="#">Account Info</a></li>
-        <li><a class="menu-button" href="#">Orders</a></li>
+        <li><a class="signout-button" onclick="redirectToAdmin()">Orders</a></li>
         <li><a class="menu-button" href="#">Settings</a></li>
         <li><a class="signout-button" onclick="signOutUser()">Sign Out</a></li>
         `;
@@ -17,6 +17,16 @@ function changeAccountDropdown(loggedIn) {
         <li><a class="menu-button" href="../views/sign-in.html">Sign In</a></li>
         <li><a class="menu-button" href="../views/register.html">Register</a></li>
         `;
+    }
+}
+
+function redirectToAdmin() {
+    console.log("HELLO");
+    const storedUser = localStorage.getItem("loggedInUser");
+    if (storedUser === "admin") {
+        window.location.href = "../views/admin.html";
+    } else {
+        alert("You must be an Admin to access this page!");
     }
 }
 
