@@ -96,14 +96,13 @@ confirmOrderButton.addEventListener("click", function (event) {
     }
 
     if (isFormValid && isValidCardNumber) {
-        // Retrieve existing checkout tables or initialize an empty array
-        const existingCheckoutTables = JSON.parse(localStorage.getItem("checkoutTables")) || [];
+        const loggedInUser = localStorage.getItem("loggedInUser");
+        const checkoutData = JSON.parse(localStorage.getItem("checkoutData")) || [];
 
-        // Add the current cart data as a new checkout table
-        existingCheckoutTables.push(cartItems);
+        const checkout = { username: loggedInUser, items: cartItems };
+        checkoutData.push(checkout);
 
-        // Store the updated checkout tables in localStorage
-        localStorage.setItem("checkoutTables", JSON.stringify(existingCheckoutTables));
+        localStorage.setItem("checkoutData", JSON.stringify(checkoutData));
 
         localStorage.removeItem("cart");
         window.location.href = "../html/index.html?orderSuccess=true";

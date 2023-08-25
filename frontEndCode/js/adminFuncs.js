@@ -1,14 +1,14 @@
 function displayCheckoutData() {
-    const checkoutTables = JSON.parse(localStorage.getItem("checkoutTables"));
+    const checkoutData = JSON.parse(localStorage.getItem("checkoutData"));
 
-    if (checkoutTables) {
+    if (checkoutData) {
         const adminProductsContainer = document.getElementById("admin-products-container");
 
-        checkoutTables.forEach((checkoutItems, index) => {
-            const checkoutTable = document.createElement("div");
-            checkoutTable.classList.add("checkout-table");
-            checkoutTable.innerHTML = `
-                <h3 class="center-text">Checkout Table ${index + 1}</h3>
+        checkoutData.forEach((checkout, index) => {
+            const checkoutTableDiv = document.createElement("div");
+            checkoutTableDiv.classList.add("checkout-table");
+            checkoutTableDiv.innerHTML = `
+                <h3 class="center-text">Order by ${checkout.username}:</h3>
                 <table>
                     <thead>
                         <tr>
@@ -19,7 +19,7 @@ function displayCheckoutData() {
                         </tr>
                     </thead>
                     <tbody>
-                        ${checkoutItems.map(item => `
+                        ${checkout.items.map(item => `
                             <tr>
                                 <td>${item.name}</td>
                                 <td>${item.quantity}</td>
@@ -30,10 +30,9 @@ function displayCheckoutData() {
                     </tbody>
                 </table>
             `;
-            adminProductsContainer.appendChild(checkoutTable);
+            adminProductsContainer.appendChild(checkoutTableDiv);
         });
     }
 }
 
-// Call the function to display checkout data on admin page load
 displayCheckoutData();
