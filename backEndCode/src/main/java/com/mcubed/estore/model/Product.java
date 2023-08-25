@@ -56,7 +56,6 @@ public class Product {
         return brand;
     }
 
-
     public void setId(Integer id) {
         this.id = id;
     }

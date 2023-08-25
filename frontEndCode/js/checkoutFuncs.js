@@ -79,29 +79,52 @@ function validateCardNumber(cardNumber) {
 }
 
 const cardNumberInput = document.getElementById("card-number");
-const confirmOrderButton = document.getElementById(
-    "confirm-order-button"
-);
+const confirmOrderButton = document.getElementById("confirm-order-button");
 const cardError = document.getElementById("card-error");
 
 confirmOrderButton.addEventListener("click", function (event) {
-    console.log("CLICKED");
     event.preventDefault();
     cardError.style.display = "none";
 
     const isValidCardNumber = validateCardNumber(cardNumberInput.value);
-    console.log("HELLO");
     const isFormValid = validateForm();
     console.log(isValidCardNumber);
     if (!isValidCardNumber) {
         cardError.style.display = "block";
-        console.log("CHECK 1");
+    } else {
+        const loggedInUser = localStorage.getItem("loggedInUser");
+
+        const checkoutData = {
+            user: loggedInUser,
+            items: cartItems
+        };
+
+        const apiUrl = "http://localhost:8080/api/cart/checkout";
+        fetch(apiUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(checkoutData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                localStorage.removeItem("cart");
+                window.location.href = "../html/index.html?orderSuccess=true";
+            } else {
+                alert("Checkout failed. Please try again later.");
+            }
+        })
+        .catch(error => {
+            console.error("Error during checkout:", error);
+            alert("An error occurred during checkout. Please try again later.");
+        });
     }
 
     if (isFormValid && isValidCardNumber) {
         localStorage.removeItem("cart");
         window.location.href = "../html/index.html?orderSuccess=true";
-        console.log("CHECK 2");
     }
 });
 
