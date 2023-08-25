@@ -17,4 +17,7 @@ public interface ProductDAO extends JpaRepository<Product, Long> {
 	
 	@Query("SELECT DISTINCT p.brand FROM Product p")
 	List<String> findDistinctBrands();
+
+	@Query("SELECT p.id FROM Product p WHERE p.prodName = ?1")
+    Product findProductIdByProdName(String prodName);
 }

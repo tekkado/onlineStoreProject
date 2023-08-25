@@ -92,14 +92,14 @@ confirmOrderButton.addEventListener("click", function (event) {
     if (!isValidCardNumber) {
         cardError.style.display = "block";
     } else {
-        const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+        const loggedInUser = localStorage.getItem("loggedInUser");
 
         const checkoutData = {
-            user: loggedInUser.id,
+            user: loggedInUser,
             items: cartItems
         };
 
-        const apiUrl = "http://localhost:8080/api/cart";
+        const apiUrl = "http://localhost:8080/api/cart/checkout";
         fetch(apiUrl, {
             method: "POST",
             headers: {
